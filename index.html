@@ -9,10 +9,10 @@
 <body>
     <div id="wrap">
 <h1>うるがいの話　ある日</h1>
-<a href="#label20230209">
+<a href="#label20230210">
 <span class="today_title">
 最新:
-動画の音量レベル
+Python（パイソン）
 </span>
 </a>
 <h3>【うるがいの話　ある日】とは　一日だけのプログです</h3>
@@ -79,37 +79,63 @@
 		</td>
 	</tr>
 </table>
-<br>2023年02月09日 (木）<span class="today_title">動画の音量レベル</span>
-<a id="label20230209"></a>
-<br>17:52
+<br>2023年02月10日 (金）<span class="today_title">Python（パイソン）</span>
+<a id="label20230210"></a>
+<br>15:59
 <br>
-<a href="./link/20230209_1Sora.html"  target="_blank">  
-<img src="./Reimage/20230209_1Sora.JPG" alt="空" width="133" height="100" border="0" />
+<a href="./link/20230210_1Sora.html"  target="_blank">  
+<img src="./Reimage/20230210_1Sora.JPG" alt="空" width="133" height="100" border="0" />
 </a>
-<a href="./link/20230209_2Tutuji.html"  target="_blank">  
-<img src="./Reimage/20230209_2Tutuji.JPG" alt="ツツジ" width="133" height="100" border="0" />
-</a>
-<a href="./link/20230209_3Mati.html"  target="_blank">  
-<img src="./Reimage/20230209_3Mati.JPG" alt="待ち" width="79" height="100" border="0" />
-</a>
-<br>高性能のディスクトップパソコンＰＣ３号に、オーディオインターフェース（
-<br>パソコンと楽器を接続するために必要な音楽機材の一種で、ＤＴＭや宅録に欠
-<br>かせないアイテム、再生する音質もいいと書かれている）機器を接続し、ユー
-<br>チューブ動画を録画したところ、音量レベルが小さすぎ！る。それに気づかず
-<br>、ユーチューブに動画をアップ、そして数日が過ぎユーチューブで動画をみる
-<br>と音がほとんど聞こえず、音量を最大にするとなんとか聞こえる（それでも、
-<br>親指を立ててくれた視聴者が一人いたが）。オーディオインターフェース機器
-<br>を外せば、それなりに音量レベルは上がるのだが、音質がな・・・、ちなみに
-<br>接続前後の音質の違いは、私は分からない。ま、せっかくなので接続したまま
-<br>でＰＣ３号をいろいろ調べ、サウンドの録音、出力を最大にしてユーチューブ
-<br>に動画をアップする、そｒでも音量レベルは低い（ラウドネスの値）。ウーン
-<br>音量レベルを上げるソフトを探すかと・・・、話は長くなるので結論だけ。
-<br>フリーソフトウェアＦＦｍｐｅｇを利用して、録画の音量レベルを確認し、そ
-<br>の音量レベルを元に、音量レベルを大きくする。具体的は・・・・・・・・・
-<br>おっと、時間ですよ、おかみさん。明日に続く
+<br>さて、昨日の続きである。オリジナルの動画はSolveig_Song_yutube.mp4
 <br>
-<br>１７時４７分　ビットコインの総資産　￥８、６２４（↓１７６）
+<br>1.音量レベルを確認
 <br>
+<br> ffmpeg -i  Solveig_Song_yutube.mp4 -vn -af volumedetect -f null -
+<br> 結果
+<br> [Parsed_volumedetect_0 @ 000001b72db32d40] mean_volume: -46.2 dB
+<br> [Parsed_volumedetect_0 @ 000001b72db32d40] max_volume: -31.2 dB
+<br>
+<br> max_volume:最大値が、-31.2 dBなので、この値を0 dbにしたい
+<br> ので、音量を31.2倍にすればいい、ただし、実際に変換後を確認すると０より
+<br> 小さいので０にするために4（適当に）をさらに加えた
+<br>
+<br>2.ゲイン調整（音量を３５倍:31+4) 
+<br>	→ 変換後のファイルはoutput_gein35_M-TRACK.mp4
+<br>
+<br>ffmpeg -i Solveig_Song_yutube.mp4 -af volume=35dB 
+<br>          output_gein35_M-TRACK.mp4	
+<br>
+<br> 音量変換後のレベルを確認
+<br>
+<br> ffmpeg -i  output_gein35_M-TRACK.mp4 -vn -af volumedetect -f null -		
+<br> 結果
+<br> [Parsed_volumedetect_0 @ 000001a3e92c2800] mean_volume: -12.6 dB
+<br> [Parsed_volumedetect_0 @ 000001a3e92c2800] max_volume: 0.0 dB	
+<br>
+<br>これで、動画の音量レベルを調整できたのでこのデータをユーチューブにアッ
+<br>プする。<a href="https://youtu.be/sB7Ad4T-ZhI" target="_blank">ソルヴェイグの歌</a>
+<br>
+<br>さてとついでに上手く行かなったことも書くとする。
+<br>
+<br>a．無料のビデオファイルの音量を上げることができるソフト
+<br>　Free Video Volume Booster	　　	
+<br>  音がこもってしまう。劣化しないと書いてあったが・・・・・。
+<br>  それと、ソフトを起動する度に『この不明の発行元からのアプリがデバイス
+<br>  に変更を加えることを許可しますか』と警告が出る！
+<br>
+<a href="./link/20230210_2FreeVideoVolumeBooster.html"  target="_blank">  
+<img src="./Reimage/20230210_2FreeVideoVolumeBooster.JPG" alt="警告" width="134" height="100" border="0" />
+</a>
+<br>b.ffmpeg-normalizeで動画の音声をnormalizeする
+<br>  最適化するとあったが、実行したところ音量レベルが小さい
+<br>
+<br>と、音が劣化していないかヘッドホーンを使って作業をした。こんなのを書い
+<br>て読む人は分かるだろうか、アハハ。ネットで動画のボリュームを上たいと検索
+<br>しても無料のソフトでは、個人的は怪しいと思っている『Free Video Volume 
+<br>Booster』しか探せない。ところが、検索の単語に『Python』を入れるとffmpeg
+<br>が現れるのである。 Python（パイソン）、つくづく便利なフリーソフトである。	
+<br>
+<br>１５時４９分　ビットコインの総資産　￥８、３３８（↓２８６）
 <br>
 </div><!-- /#wrap -->
 </body>
