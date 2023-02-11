@@ -9,10 +9,10 @@
 <body>
     <div id="wrap">
 <h1>うるがいの話　ある日</h1>
-<a href="#label20230210">
+<a href="#label20230211">
 <span class="today_title">
 最新:
-Python（パイソン）
+２０２３年建国記念の日
 </span>
 </a>
 <h3>【うるがいの話　ある日】とは　一日だけのプログです</h3>
@@ -79,63 +79,33 @@ Python（パイソン）
 		</td>
 	</tr>
 </table>
-<br>2023年02月10日 (金）<span class="today_title">Python（パイソン）</span>
-<a id="label20230210"></a>
-<br>15:59
+<br>2023年02月11日 (土）<span class="today_title">２０２３年建国記念の日</span>
+<a id="label20230211"></a>
+<br>16:27
 <br>
-<a href="./link/20230210_1Sora.html"  target="_blank">  
-<img src="./Reimage/20230210_1Sora.JPG" alt="空" width="133" height="100" border="0" />
+<a href="./link/20230211_1Sora.html"  target="_blank">  
+<img src="./Reimage/20230211_1Sora.JPG" alt="空" width="133" height="100" border="0" />
 </a>
-<br>さて、昨日の続きである。オリジナルの動画はSolveig_Song_yutube.mp4
-<br>
-<br>1.音量レベルを確認
-<br>
-<br> ffmpeg -i  Solveig_Song_yutube.mp4 -vn -af volumedetect -f null -
-<br> 結果
-<br> [Parsed_volumedetect_0 @ 000001b72db32d40] mean_volume: -46.2 dB
-<br> [Parsed_volumedetect_0 @ 000001b72db32d40] max_volume: -31.2 dB
-<br>
-<br> max_volume:最大値が、-31.2 dBなので、この値を0 dbにしたい
-<br> ので、音量を31.2倍にすればいい、ただし、実際に変換後を確認すると０より
-<br> 小さいので０にするために4（適当に）をさらに加えた
-<br>
-<br>2.ゲイン調整（音量を３５倍:31+4) 
-<br>	→ 変換後のファイルはoutput_gein35_M-TRACK.mp4
-<br>
-<br>ffmpeg -i Solveig_Song_yutube.mp4 -af volume=35dB 
-<br>          output_gein35_M-TRACK.mp4	
-<br>
-<br> 音量変換後のレベルを確認
-<br>
-<br> ffmpeg -i  output_gein35_M-TRACK.mp4 -vn -af volumedetect -f null -		
-<br> 結果
-<br> [Parsed_volumedetect_0 @ 000001a3e92c2800] mean_volume: -12.6 dB
-<br> [Parsed_volumedetect_0 @ 000001a3e92c2800] max_volume: 0.0 dB	
-<br>
-<br>これで、動画の音量レベルを調整できたのでこのデータをユーチューブにアッ
-<br>プする。<a href="https://youtu.be/sB7Ad4T-ZhI" target="_blank">ソルヴェイグの歌</a>
-<br>
-<br>さてとついでに上手く行かなったことも書くとする。
-<br>
-<br>a．無料のビデオファイルの音量を上げることができるソフト
-<br>　Free Video Volume Booster	　　	
-<br>  音がこもってしまう。劣化しないと書いてあったが・・・・・。
-<br>  それと、ソフトを起動する度に『この不明の発行元からのアプリがデバイス
-<br>  に変更を加えることを許可しますか』と警告が出る！
-<br>
-<a href="./link/20230210_2FreeVideoVolumeBooster.html"  target="_blank">  
-<img src="./Reimage/20230210_2FreeVideoVolumeBooster.JPG" alt="警告" width="134" height="100" border="0" />
+<br>１９７８年の『建国記念の日』は、穏やかな晴れの日だった。小さい近所のケ
+<br>ーキ屋さんにいったら、大勢の女性や家族連れで、にぎわっていた。ところで
+<br>『建国記念の日』は、日本の建国された日と思っていた。トホホ、ネットでは
+<div style="color:blue">
+<br>「建国記念の日」で「建国記念日」はない？
+<br>日本は大変歴史が古い国で、長い間治世者として国を治めてきた皇室は、世界
+<br>で最も歴史が長い王家として、ギネスブックにも記録されている一方、いつ日
+<br>本が建国されたかわかる明確な資料はまだ見つかっていないのです。
+<br>そのため、建国記念日ではなく、日本が建国されたことを祝う日として、「建
+<br>国記念の日」という名前なのです。
+</div>
+<a href="./link/20230211_2Hazalura.html"  target="_blank">  
+<img src="./Reimage/20230211_2Hazalura.JPG" alt="葉桜" width="550" height=auto border="0" />
 </a>
-<br>b.ffmpeg-normalizeで動画の音声をnormalizeする
-<br>  最適化するとあったが、実行したところ音量レベルが小さい
+<br>体重がなかなか落ちないので、先週から食事の回数を２食に減らした。効果てき
+<br>面、１キログラムほど落ちる。朝食と昼食を合体、１１時頃に１食目をとる。夕
+<br>食は今まで通り、普通にお菓子も頂く。
 <br>
-<br>と、音が劣化していないかヘッドホーンを使って作業をした。こんなのを書い
-<br>て読む人は分かるだろうか、アハハ。ネットで動画のボリュームを上たいと検索
-<br>しても無料のソフトでは、個人的は怪しいと思っている『Free Video Volume 
-<br>Booster』しか探せない。ところが、検索の単語に『Python』を入れるとffmpeg
-<br>が現れるのである。 Python（パイソン）、つくづく便利なフリーソフトである。	
+<br>１６時２０分　ビットコインの総資産　￥８、２５３（↓８５）
 <br>
-<br>１５時４９分　ビットコインの総資産　￥８、３３８（↓２８６）
 <br>
 </div><!-- /#wrap -->
 </body>
