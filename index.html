@@ -9,10 +9,10 @@
 <body>
     <div id="wrap">
 <h1>うるがいの話　ある日</h1>
-<a href="#label20230502">
+<a href="#label20230503">
 <span class="today_title">
 最新:
-雑草スベリヒユ
+win11のXAMPPでPerl開発環境
 </span>
 </a>
 <h3>【うるがいの話　ある日】とは　一日だけのプログです</h3>
@@ -79,32 +79,89 @@
 		</td>
 	</tr>
 </table>
-<br>2023年05月02日 (火）<span class="today_title">雑草スベリヒユ</span>
-<a id="label20230502"></a>
-<br>15:45
+<br>2023年05月03日 (水）<span class="today_title">win11のXAMPPでPerl開発環境</span>
+<a id="label20230503"></a>
+<br>14:57
 <br>
-<a href="./link/20230502_1Sora.html"  target="_blank">  
-<img src="./Reimage/20230502_1Sora.JPG" alt="空" width="75" height="100" border="0" />
+<a href="./link/20230503_1Sora.html"  target="_blank">  
+<img src="./Reimage/20230503_1Sora.JPG" alt="空" width="75" height="100" border="0" />
 </a>
-<a href="./link/20230502_2Hana.html"  target="_blank">  
-<img src="./Reimage/20230502_2Hana.JPG" alt="花" width="75" height="100" border="0" />
+<a href="./link/20230503_2Ran1.html"  target="_blank">  
+<img src="./Reimage/20230503_2Ran1.JPG" alt="蘭１" width="75" height="100" border="0" />
 </a>
-<a href="./link/20230502_3Kusa.html"  target="_blank">  
-<img src="./Reimage/20230502_3Kusa.JPG" alt="雑草" width="75" height="100" border="0" />
+<a href="./link/20230503_3Ran2.html"  target="_blank">  
+<img src="./Reimage/20230503_3Ran2.JPG" alt="欄２" width="75" height="100" border="0" />
 </a>
-<br>ウォーキングしているとどこかでみたような雑草が、生えていた。山原の近所
-<br>に住んでいたゼントクオバーが、料理していた（私は食べたことは無い）。グ
-<br>ーグル先生に頼ると
-<br><div style="color:blue">
-<br>スベリヒユ
-<br>乾燥に強く、畑など陽当たりのよい地面を這うように繁殖します。その生命力
-<br>の強さゆえに厄介な雑草とされていますが、その強力な解毒、消炎作用は「天
-<br>然の抗生物質」といわれるほど。解熱、咳止め、止血、鎮痛、整腸、湿疹、虫
-<br>刺され、皮膚炎、抗菌などに昔から使われてきました。
-<br></div>
-<br>なるほど、昔の人の知恵は凄いもんだ。いつか、試食してみよう。
+<a href="./link/20230503_4Ran3.html"  target="_blank">  
+<img src="./Reimage/20230503_4Ran3.JPG" alt="蘭３" width="75" height="100" border="0" />
+</a>
+<br>２０１２年に発行された「つくって覚えるＰｅｒｌ入門」の本をもとにWind
+<br>dows11上にXAMPP(xampp-windows-x64-8.2.4-0-VS16-installer.exe)を
+<br>インストールした。
+<br>ところが、本が発行されてから１０年以上も経ってしまっている。古い本を利
+<br>用するときによくあることで本の通りにいかないのである。
+<br>ネットも参考し、chatGPTへ質問したが・・・、ま、推奨されないかもしれな
+<br>いが手前みその環境なので、以下の対応することで本を最後まで実践できた。
+<br>本は良書だと思う、どこかの誰かが参考にするかもとメモることにした。
+<br>	
+<br>1.ppm   → CPAN,CPANM
+<br>	
+<br>p78)ppm install GDGraph   → CPAN  GD::Graph
+<br>そのあと
+<br>    C:\Strawberry\perl\site\lib\GD → C:\xampp\perl\site\lib
+<br>    配下へコピーする							
 <br>
-<br>１５時４２分　ビットコインの総資産　￥１１、２０４（↓１６３）
+<br>p128)ppm install Date::Simple  → cpanm Date::Simple
+<br>そのあと
+<br>    mklink/j c:\usr c:\strawberry\perl
+<br>    参考【2020年】win10のXAMPPでPerl開発環境２♪Perlの場所の宣言
+<br>    https://soramanabrog.com/thor/xampp-s-perl/
+<br>			
+<br>p177)ppm install CGI::Session  → CPAN  CGI::Session
+<br>そのあと
+<br>     C:\Strawberry\perl\site\lib\CGI → C:\xampp\perl\site\lib
+<br>     配下へコピーする							
+<br>	
+<br>メモ ppmの運用はCPANへ、CPANで行えない場合はCPANMでStrawberryへ
+<br>モジュールがインストールされる。
+<br>	
+<br>XAMPPをインストールする前にStrawberry Perl のインストールしいるので、
+<br>特殊変数 @INCは
+<br>    C:/Strawberry/perl/site/lib
+<br>    C:/Strawberry/perl/vendor/lib
+<br>    C:/Strawberry/perl/lib
+<br>
+<br>ところがXAMPPのPerlは特殊変数 @INCが以下のライブラリを前提としている
+<br>   	(@INC contains: 
+<br>   	C:/xampp/perl/site/lib/MSWin32-x64-multi-thread
+<br>   	C:/xampp/perl/site/lib
+<br>   	C:/xampp/perl/vendor/lib
+<br>   	C:/xampp/perl/lib)
+<br>
+<br>2.mysql → MariaDBへ
+<br>
+<br>そのためなのだろうか、sample_user　の権限でエラーになった
+<br>
+<br>p150)use sample_db;       →   エラーとなる
+<br>  sample_userユーザーを再作成し、すべてのDBに権限を与える
+<br>	
+<br>■sample_user)ユーザーを削除
+<br>    drop user sample_user@localhost;
+<br>		
+<br>■ユーザーを再作成
+<br>    create user 'sample_user'@'localhost' identified by 'sample_pass';
+<br>		
+<br>■サーバー内のすべてのデータベースに対して権限を付与
+<br>    GRANT ALL ON *.* TO "sample_user"@"localhost";
+<br>
+<br>3.XAMPP  Miraidb 日本語	XAMPPでのMYSQL文字化け
+<br>	
+<br>  p157)	select * from question_tb;   → 日本語が化ける！
+<br>
+<br>ただし、コマンドプロンプトだけの表示だけで格納は問題ないので対応せず	
+<br>
+<br>
+<br>１４時５０分　ビットコインの総資産　￥１１、２５５（↑５１）
 <br>
 </div><!-- /#wrap -->
 </body>
