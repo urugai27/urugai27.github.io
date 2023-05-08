@@ -9,10 +9,10 @@
 <body>
     <div id="wrap">
 <h1>うるがいの話　ある日</h1>
-<a href="#label20230507">
+<a href="#label20230508">
 <span class="today_title">
 最新:
-大宜味村役場新庁舎
+Firebase容量オーバーでデプロイできない
 </span>
 </a>
 <h3>【うるがいの話　ある日】とは　一日だけのプログです</h3>
@@ -79,23 +79,73 @@
 		</td>
 	</tr>
 </table>
-<br>2023年05月07日 (日）<span class="today_title">大宜味村役場新庁舎</span>
-<a id="label20230507"></a>
-<br>17:00
+<br>2023年05月08日 (月）<span class="today_title">Firebase容量オーバーでデプロイできない</span>
+<a id="label20230508"></a>
+<br>15:56
 <br>
-<a href="./link/20230507_1Sora.html"  target="_blank">  
-<img src="./Reimage/20230507_1Sora.JPG" alt="空" width="75" height="100" border="0" />
+<a href="./link/20230508_1Sora.html"  target="_blank">  
+<img src="./Reimage/20230508_1Sora.JPG" alt="空" width="163" height="100" border="0" />
 </a>
-<br>新聞を見ると、明日５月８日（月）に開庁と載っていた。もともとは谷間のあ
-<br>った畑（そこでコオロギを取っていた）を造成して１９７２年に建設された私
-<br>が成人式を行った旧庁舎は、いろいろと思い出があったが。なんと立派な建物
-<br>（図書室もある）！、今後行くことはあるのだろうかとフと考えてしまう。ま
-<br>だ、現役の時はふるさと納税でも関わりがあったがどんどん、縁が遠のいく。
+<br>きのうの夜９時半過ぎ、フと履歴を消す方法が分かる。履歴を７に設定すると
+<br>一分後には保持前のデプロイ（プログの配置）が自動削除済へ変わっていた。
 <br>
-<a href="./link/20230507_2Hana.html"  target="_blank">  
-<img src="./Reimage/20230507_2Hana.JPG" alt="ペトレア" width="550" height=auto border="0" />
+<a href="./link/20230508_2FireBase.html"  target="_blank">  
+<img src="./Reimage/20230508_2FireBase.JPG" alt="FireBase" width="224" height=auto border="0" />
 </a>
-<br>１６時５３分　ビットコインの総資産　￥１１、３３３（↓１４２）
+<a href="./link/20230508_3Recavaery.html"  target="_blank">  
+<img src="./Reimage/20230508_3Recavaery.JPG" alt="設定" width="275" height=auto border="0" />
+</a>
+<br>使用容量が制限２０ＧＢを示していたが、０ＧＢ（実際は０．３ＧＢ）になっ
+<br>た。昨日の日付分のデプロイを行うと、正常に終わる。事は遡のぼる５月５日
+<div style="color:blue">
+<br>PS E:\Urugai27> firebase deploy
+<br>=== Deploying to 'urugai27'...
+<br>i  deploying hosting
+<br>
+<br>Error: HTTP Error: 429, You have exceeded the Hosting storage quota 
+<br>for your Firebase project, so you cannot deploy to your site right
+<br> now. Visit the Firebase console to either manage your Hosting 
+<br>storage or upgrade to the Blaze plan.
+</div>
+<br>『ギーマの話』のプログをアップしたところ上のメッセージが出てアップでき
+<br>ず。とりあえず、Ｆｉｒｅｂａｓｅ容量オーバーが原因とまで調べる。きのう
+<br>は、朝からいろいろ対応策を試して疲れた。日々０．１ＧＢ未満のデータの履
+<br>歴が、２０２１年９月２９日から積みあがったのが原因だった。ところで他の
+<br>サイトは大丈夫だろうか、確認した。
+<br>
+<br>『うるがいの話』　　　　　制限２ＧＢ　、使用０．８３ＧＢ　nifty
+<br>『カミマヤーの話』　　　　制限なし　　、おお！　　　　　　bibucket
+<br>『たながぁの音楽』　　　　制限なし　　、おお！　　　　　　bibucket
+<br>『ぶながぁの話』　　　　　制限１ＧＢ　、使用０．０２ＧＢ　FC2
+<br>『ギーマの話』　　　　　　制限２０ＧＢ、使用０．０９ＧＢ　firebase
+<br>『うるがいの話　ある日』　制限なし　　、おお！　　　　　　Github
+<br>
+<br>実質、増えていくのは日々のプログを展開している『うるがいの話』だけであ
+<br>る。おっと、ChatGPTに尋ねてみよう。
+<br><div style="color:blue">
+<br>firebaseのホスティングサービスのストレージクォータを超えた場合、無料
+<br>プランではストレージを減らすことはできません。ただし、いくつかの方法を
+<br>試して容量を節約することはできます。以下にいくつかのアプローチを示しま
+<br>す。
+<br>
+<br>１．不要なファイルの削除：ホスティングされているプロジェクトのファイル
+<br>を見直し、不要なファイルや使用していないファイルを削除することでストレ
+<br>ージを節約できます。
+<br>２．３．４．・・・・、回答が参考にならので割愛
+</div>
+<br>いまのところ、ChatGPTの回答はこんなものです。これでは、うーん。ついで
+<br>に、昨日から利用できるMicrosoftのBingChatにも尋ねてみた。
+<br><div style="color:blue">
+<br>不要なファイルの削除
+<br>画像の圧縮
+<br>ファイルのキャッシュの設定
+<br></div>
+<br>では、模範解答をば、これがあれば具体的な手順はネットで検索で分かる。
+<div style="color:red">
+<br>『ストレージのリリースに関する設定で、デプロイ履歴を減らす』
+</div>
+<br>
+<br>１５時４２分　ビットコインの総資産　￥１１、０７６（↓２６７）
 <br>
 </div><!-- /#wrap -->
 </body>
