@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="Shift-JIS">
-<title>æÔ‚Ì•ª‚ğİ’è‚·‚é</title>
+	<meta charset="utf-8">
+<title>ä¹—è»Šæ™‚åˆ»ã®åˆ†ã‚’è¨­å®šã™ã‚‹</title>
 <style>
  form {
   width: 170px;
-  padding:8px;			/*ƒ{ƒbƒNƒX“à‘¤‚Ì—]”’ */
-  white-space: nowrap;  /*”¼ŠpƒXƒy[ƒXAƒ^ƒuA‰üs‚ğƒuƒ‰ƒEƒU‚Å‚Ç‚Ì‚æ‚¤‚É•\¦‚³‚¹‚é‚©‚ğŒˆ‚ß‚Ü‚·B:Ü‚è•Ô‚µ‚³‚ê‚È‚¢*/
-  border: solid 1px #ff0000; /*ÔF */
-  background-color : #F2F2F2 ;		/*”wŒiF‚ğ”–‚¢ŠDF */
+  padding:8px;			/*ãƒœãƒƒã‚¯ã‚¹å†…å´ã®ä½™ç™½ */
+  white-space: nowrap;  /*åŠè§’ã‚¹ãƒšãƒ¼ã‚¹ã€ã‚¿ãƒ–ã€æ”¹è¡Œã‚’ãƒ–ãƒ©ã‚¦ã‚¶ã§ã©ã®ã‚ˆã†ã«è¡¨ç¤ºã•ã›ã‚‹ã‹ã‚’æ±ºã‚ã¾ã™ã€‚:æŠ˜ã‚Šè¿”ã—ã•ã‚Œãªã„*/
+  border: solid 1px #ff0000; /*èµ¤è‰² */
+  background-color : #F2F2F2 ;		/*èƒŒæ™¯è‰²ã‚’è–„ã„ç°è‰² */
   overflow: hidden;
 
 }	
@@ -24,11 +24,11 @@
     function proc() {
 /*    
       elem = document.getElementById("output");
-      elem.innerText = "JavaScript‚ªÀs‚³‚ê‚Ü‚µ‚½B";
+      elem.innerText = "JavaScriptãŒå®Ÿè¡Œã•ã‚Œã¾ã—ãŸã€‚";
 */      
-// “ü—Í‚³‚ê‚½ƒL[‚Æ’l‚ğæ‚èo‚·
+// å…¥åŠ›ã•ã‚ŒãŸã‚­ãƒ¼ã¨å€¤ã‚’å–ã‚Šå‡ºã™
 	var key = "rideTimeMM";
-// •Û‘¶‚³‚ê‚½’l‚ğæ‚èo‚·
+// ä¿å­˜ã•ã‚ŒãŸå€¤ã‚’å–ã‚Šå‡ºã™
 	var localData = localStorage.getItem(key);
 	var minutes_index = 6;
 
@@ -42,8 +42,8 @@
 			case "40":		        minutes_index = 4;			break;
 			case "50":		        minutes_index = 5;			break;
 			default:
-		//‚¢‚¸‚ê‚àˆê’v‚µ‚È‚©‚Á‚½ê‡;
-		   	console.log("‚¢‚¸‚ê‚àˆê’v‚µ‚È‚©‚Á‚½");
+		//ã„ãšã‚Œã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸå ´åˆ;
+		   	console.log("ã„ãšã‚Œã‚‚ä¸€è‡´ã—ãªã‹ã£ãŸ");
 			break;
 			};
 
@@ -53,13 +53,13 @@
     }
 </script>
 </head>
-<body onload="proc();">				<!-- bodyƒ^ƒO‚Ìonload‚É‹Lq‚·‚é•û–@ -->
+<body onload="proc();">				<!-- bodyã‚¿ã‚°ã®onloadã«è¨˜è¿°ã™ã‚‹æ–¹æ³• -->
 <!--<div id="output"></div>         -->
 <form name="form1">
-€–Ú‚ğ‘I‘ğ
+é …ç›®ã‚’é¸æŠ
 <br>
 <select id="minutes" size="5">
-<option value="00">00@@@@@@@@@@@</option>
+<option value="00">00ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€</option>
 <option value="10">10</option>
 <option value="20">20</option>
 <option value="30">30</option>
@@ -67,19 +67,19 @@
 <option value="50">50</option>
 
 </select>
-<br>@@@@@@@&nbsp;
-<input type="button" onclick="clickBtn1()"  value="‚n‚j">
+<br>ã€€ã€€ã€€ã€€ã€€ã€€ã€€&nbsp;
+<input type="button" onclick="clickBtn1()"  value="ï¼¯ï¼«">
 </form>
 <script>
 function clickBtn1(){
 
 	const minutes = document.form1.minutes;
 
-	// ’l(”’l)‚ğæ“¾
+	// å€¤(æ•°å€¤)ã‚’å–å¾—
 	const num = minutes.selectedIndex;
 	//const num = document.form1.minutes.selectedIndex;
 
-	// ’l(”’l)‚©‚ç’l(value’l)‚ğæ“¾
+	// å€¤(æ•°å€¤)ã‹ã‚‰å€¤(valueå€¤)ã‚’å–å¾—
 	const str = minutes.options[num].value;
 	//const str = document.form1.minutes.options[num].value;
 
@@ -87,20 +87,20 @@ function clickBtn1(){
 	
 	console.log(str);	
 
-// “ü—Í‚³‚ê‚½ƒL[‚Æ’l‚ğæ‚èo‚·
+// å…¥åŠ›ã•ã‚ŒãŸã‚­ãƒ¼ã¨å€¤ã‚’å–ã‚Šå‡ºã™
 	var key = "rideTimeMM";
 	var data = str;
 
-// ƒ[ƒJƒ‹ƒXƒgƒŒ[ƒW‚É•Û‘¶‚·‚é
+// ãƒ­ãƒ¼ã‚«ãƒ«ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«ä¿å­˜ã™ã‚‹
 	localStorage.setItem(key,data);
-// ƒZƒbƒVƒ‡ƒ“ƒXƒgƒŒ[ƒW‚É•Û‘¶‚·‚é
+// ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«ä¿å­˜ã™ã‚‹
 	sessionStorage.setItem(key,data);
 
-// •Û‘¶‚³‚ê‚½’l‚ğæ‚èo‚·
+// ä¿å­˜ã•ã‚ŒãŸå€¤ã‚’å–ã‚Šå‡ºã™
 	var localData = localStorage.getItem(key);
 	var sessionData = sessionStorage.getItem(key);
 
-    // eƒEƒBƒ“ƒhƒE‚ÌƒIƒuƒWƒFƒNƒg‚ğ‘€ì
+    // è¦ªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ“ä½œ
     window.opener.document.form1.rideTimeMM.value = data;
 
 	window.close();
