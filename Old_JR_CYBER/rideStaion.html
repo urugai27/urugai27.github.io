@@ -55,7 +55,7 @@
 </select>
 <br>
 <input type="checkbox" name="q1" value="その1">パスワードを入力
-<input type="checkbox" name="q2" value="その2">フィールドを削除する
+<input type="checkbox" id="q2" name="q2" value="その2">フィールドを削除する
 <br>入力を完了した後、Enterキーを押します
 <br>
 <!--
@@ -63,8 +63,9 @@
 -->
 </form>
 <script>
-    const input     = document.getElementById("rideStation");
-             
+/*    const input     = document.getElementById("rideStation");	*/
+  	  const input     = document.getElementById("q2");
+  	               
     input.addEventListener("keydown", (e) => {
         if( e.keyCode === 13 ){
                 console.log("Enter");
