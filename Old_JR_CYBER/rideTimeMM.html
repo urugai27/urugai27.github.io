@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="Shift-JIS">
+<title>乗車時刻の分を設定する</title>
+<style>
+ form {
+  width: 170px;
+  padding:8px;			/*ボックス内側の余白 */
+  white-space: nowrap;  /*半角スペース、タブ、改行をブラウザでどのように表示させるかを決めます。:折り返しされない*/
+  border: solid 1px #ff0000; /*赤色 */
+  background-color : #F2F2F2 ;		/*背景色を薄い灰色 */
+  overflow: hidden;
+
+}	
+#minutes {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border: solid grey 1px;
+}
+</style>
+<script>
+    function proc() {
+/*    
+      elem = document.getElementById("output");
+      elem.innerText = "JavaScriptが実行されました。";
+*/      
+// 入力されたキーと値を取り出す
+	var key = "rideTimeMM";
+// 保存された値を取り出す
+	var localData = localStorage.getItem(key);
+	var minutes_index = 6;
+
+	console.log( localData );
+
+	 		switch (localData) {
+			case "00":		        minutes_index = 0;			break;
+			case "10":		        minutes_index = 1;			break;
+			case "20":		        minutes_index = 2;			break;
+			case "30":		        minutes_index = 3;			break;
+			case "40":		        minutes_index = 4;			break;
+			case "50":		        minutes_index = 5;			break;
+			default:
+		//いずれも一致しなかった場合;
+		   	console.log("いずれも一致しなかった");
+			break;
+			};
+
+
+	document.getElementById("minutes").selectedIndex = minutes_index;
+
+    }
+</script>
+</head>
+<body onload="proc();">				<!-- bodyタグのonloadに記述する方法 -->
+<!--<div id="output"></div>         -->
+<form name="form1">
+項目を選択
+<br>
+<select id="minutes" size="5">
+<option value="00">00　　　　　　　　　　　</option>
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+
+</select>
+<br>　　　　　　　&nbsp;
+<input type="button" onclick="clickBtn1()"  value="ＯＫ">
+</form>
+<script>
+function clickBtn1(){
+
+	const minutes = document.form1.minutes;
+
+	// 値(数値)を取得
+	const num = minutes.selectedIndex;
+	//const num = document.form1.minutes.selectedIndex;
+
+	// 値(数値)から値(value値)を取得
+	const str = minutes.options[num].value;
+	//const str = document.form1.minutes.options[num].value;
+
+/*	document.getElementById("span1").textContent = str; 	*/
+	
+	console.log(str);	
+
+// 入力されたキーと値を取り出す
+	var key = "rideTimeMM";
+	var data = str;
+
+// ローカルストレージに保存する
+	localStorage.setItem(key,data);
+// セッションストレージに保存する
+	sessionStorage.setItem(key,data);
+
+// 保存された値を取り出す
+	var localData = localStorage.getItem(key);
+	var sessionData = sessionStorage.getItem(key);
+
+    // 親ウィンドウのオブジェクトを操作
+    window.opener.document.form1.rideTimeMM.value = data;
+
+	window.close();
+
+}
+</script>
+</body>
+</html>

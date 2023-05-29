@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html>
+    <head>
+	<meta charset="utf-8">
+	
+	<title>はじめての簡単 RPA Uipath 入門の新幹線の空席案内</title>
+<!-- ライブラリ読み込み -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<style>
+
+/* 入力 乗車駅   ボタンから入力の非表示と表示の切替 */
+#i_start { display: inline-block; }   /* インラインブロックで表示 */
+#b_strat { display: none; }           /* インラインブロックで表示 */
+
+/* 入力 降車駅   ボタンから入力の非表示と表示の切替 */
+#i_end { display: inline-block; }   /* 非表示 */
+#b_end { display: none; }   /* インラインブロックで表示 */
+
+</style>
+	
+	<style>
+   #displayStation { display: none; }     /* 非表示 */
+/* #displayStation { display: block; } */ /* インラインで表示 */
+
+</style>
+<script>
+    function proc() {				/*ページが最初に開いたとき */
+
+			// セッションの初めか判断する
+		if (sessionStorage.getItem("boardingDateMM")  ==  null){	
+//			alert("ページが最初に開きます！");
+			
+			var element_rideDateMM = document.getElementById('rideDateMM');
+			element_rideDateMM.value = "11";
+			var key = "boardingDateMM";
+			var data = "11";
+			// ローカルストレージに保存する
+			localStorage.setItem(key,data);
+			// セッションストレージに保存する
+			sessionStorage.setItem(key,data);
+
+			var element_rideDateDD = document.getElementById('rideDateDD');
+			element_rideDateDD.value = "03";
+			var key = "boardingDateDD";
+			var data = "03";
+			// ローカルストレージに保存する
+			localStorage.setItem(key,data);
+			// セッションストレージに保存する
+			sessionStorage.setItem(key,data);
+
+
+			var element_rideTimeHH = document.getElementById('rideTimeHH');
+			element_rideTimeHH.value = "22";
+			var key = "rideTimeHH";
+			var data = "22";
+			localStorage.setItem(key,data);
+			sessionStorage.setItem(key,data);
+
+			var element_rideTimeMM = document.getElementById('rideTimeMM');
+			element_rideTimeMM.value = "20";
+			var key = "rideTimeMM";
+			var data = "20";
+			localStorage.setItem(key,data);
+			sessionStorage.setItem(key,data);
+
+			var element_rideTrain = document.getElementById('rideTrain');
+			element_rideTrain.value = "選択してください";
+			var key = "rideTrain";
+			var data = "選択してください";
+			localStorage.setItem(key,data);
+			sessionStorage.setItem(key,data);
+
+/*          乗車駅と降車駅の表示パターン  */
+			var key = "diaplay_mode";
+			var data = "none";
+			localStorage.setItem(key,data);
+			sessionStorage.setItem(key,data);
+
+		}else{
+
+//			alert("ステップ８３ ページが開きます！");
+			// セッションの初め出ない場合は、退避した値を設定する
+			// 指定しない場合はvalueの値（初期）がされるため
+		
+			var element_rideDateMM = document.getElementById('rideDateMM');
+			element_rideDateMM.value = localStorage.getItem('boardingDateMM');
+			var element_rideDateDD = document.getElementById('rideDateDD');
+			element_rideDateDD.value = localStorage.getItem('boardingDateDD');
+
+			var element_rideTimeHH = document.getElementById('rideTimeHH');
+			element_rideTimeHH.value = localStorage.getItem('rideTimeHH');
+			var element_rideTimeMM = document.getElementById('rideTimeMM');
+			element_rideTimeMM.value = localStorage.getItem('rideTimeMM');
+
+		};
+
+    }
+/* 子画面から 起動する*/        
+function  parentFunc()
+{
+//			alert("ステップ１５４ 乗車駅と降車駅の表示を判定の処理を行います");
+/*  		乗車駅と降車駅の表示を判定する*/
+			var key = "diaplay_mode";
+			var localData = localStorage.getItem(key);
+
+			switch (localData) {
+				case "none":
+					document.getElementById('displayStation').style.display = 'none';
+					break;
+				case "diaplay_start":
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					document.getElementById('displayStation').style.display = 'block';
+				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'none';
+					document.getElementById('b_strat').style.display = 'inline-block';
+					document.getElementById('i_end').style.display   = 'inline-block';
+					document.getElementById('b_end').style.display   = 'none';
+					break;
+
+				case "diaplay_end":
+					document.getElementById('displayStation').style.display = 'block';
+				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'inline-block';
+					document.getElementById('b_strat').style.display = 'none';
+					document.getElementById('i_end').style.display   = 'none';
+					document.getElementById('b_end').style.display   = 'inline-block';
+
+					var key = "rideStation";
+					var localData = localStorage.getItem(key);
+					var sessionData = sessionStorage.getItem(key);
+					var element_i_start = document.getElementById('i_start');
+					element_i_start.value = localStorage.getItem(key);
+					break;
+
+				case "diaplay_finish":
+					document.getElementById('displayStation').style.display = 'block';
+				/*	alert("乗車駅と降車駅の表示する");	*/
+				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'inline-block';
+					document.getElementById('b_strat').style.display = 'none';
+					document.getElementById('i_end').style.display   = 'inline-block';
+					document.getElementById('b_end').style.display   = 'none';
+					var key = "getoffStation";
+					// 保存された降車駅の値を取り出す
+					var localData = localStorage.getItem(key);
+					var sessionData = sessionStorage.getItem(key);
+					var element_i_end = document.getElementById('i_end');
+					element_i_end.value = localStorage.getItem(key);
+					break;
+
+			};
+
+}
+</script>
+
+    </head>
+<body onload="proc();">				<!-- bodyタグのonloadに記述する方法 -->
+ <form name="form1">
+<h2>はじめての簡単 RPA Uipathの演習用 入門の新幹線の空席案内</h2>
+<h1>　　　空席案内</h1>
+
+<br>　　　　　　　　　　　　ご希望の内容を入力して、検索ボタンをクリックして下さい
+<br>
+<br>　　■ 乗車月日　　　　　　　　　　　
+<!--  left: 306.875 top: 220.78125 -->
+<input id="rideDateMM"  type="text" value="11" size="2" style="width:20px;" name="rideDateMM">
+<button onClick="openNewWindow('boardingDateMM')">▼</button>
+
+月
+<input id="rideDateDD"  type="text" value="10" size="2" style="width:20px;" name="rideDateDD">
+<button onClick="openNewWindow('boardingDateDD')">▼</button>
+日
+
+<br>　　■ 乗車時刻　　　　　　　　　　　
+<input id="rideTimeHH"  type="text" value="13" size="2" style="width:20px;" name="rideTimeHH">
+<button onClick="openNewWindow('rideTimeHH')">▼</button>
+時
+<input id="rideTimeMM"  type="text" value="30" size="2" style="width:20px;" name="rideTimeMM">
+<button onClick="openNewWindow('rideTimeMM')">▼</button>
+分
+
+<br>　　■ お乗りになる列車
+<input id="rideTrain"  type="text" value="選択してください" size="20" style="width:400px;" name="rideTrain">
+<button onClick="openNewWindow('rideTrain')">▼</button>
+
+<br>　　■ 乗車駅・降車駅
+<br>　　　　　　　　　　　　　　　　乗車駅・降車駅は
+<br>　　　　　　　　　　　　　　　　漢字・カタカナ・ひらがなで入力してください。
+<br>　　　　　　　　　　
+<!-- 乗車駅 -->
+ <input type="text" id="i_start" value="　　　　　　　　　　　"  name="startStation">
+ <input type="button"  id="b_strat" value="　　　乗車駅ボタン　　　" onclick="openNewWindow('rideStaion')">
+→
+<!-- 降車駅 -->
+ <input type="text" id="i_end" value="　　　　　　　　　　　"  name="endStation">
+ <input type="button"  id="b_end" value="　　　降車駅ボタン　　　" onclick="openNewWindow('getoffStaion')">
+　
+ <button onClick="openNewWindow()">乗車駅逆転</button>
+ 
+<div   id="displayStation">
+　　　　　　　　　　　　　　
+<select size="7">
+  <option>東京</option>
+  <option>品川</option>
+  <option>新横浜</option>
+  <option>小田原</option>
+  <option>熱海</option>
+  <option>三島</option>
+  <option>新富士</option>
+  <option>静岡</option>
+  <option>掛川</option>
+  <option>浜松</option>
+  <option>豊橋</option>
+  <option>三河安城</option>
+  <option>名古屋</option>
+  <option>岐阜羽島</option>
+  <option>米原</option>
+  <option>京都</option>
+  <option>新大阪</option>
+  <option>新神戸</option>
+  <option>西明石</option>
+  <option>姫路</option>
+  <option>相生</option>
+  <option>岡山</option>
+  <option>新倉敷</option>
+  <option>福山</option>
+  <option>新尾道</option>
+  <option>三原</option>
+  <option>東広島</option>
+  <option>広島</option>
+  <option>新岩国</option>
+  <option>徳山</option>
+  <option>新山口</option>
+  <option>厚狭</option>
+  <option>新下関</option>
+  <option>小倉</option>
+  <option>博多</option>
+</select>
+　　　　　　
+<select size="7">
+  <option>東京</option>
+  <option>品川</option>
+  <option>新横浜</option>
+  <option>小田原</option>
+  <option>熱海</option>
+  <option>三島</option>
+  <option>新富士</option>
+  <option>静岡</option>
+  <option>掛川</option>
+  <option>浜松</option>
+  <option>豊橋</option>
+  <option>三河安城</option>
+  <option>名古屋</option>
+  <option>岐阜羽島</option>
+  <option>米原</option>
+  <option>京都</option>
+  <option>新大阪</option>
+  <option>新神戸</option>
+  <option>西明石</option>
+  <option>姫路</option>
+  <option>相生</option>
+  <option>岡山</option>
+  <option>新倉敷</option>
+  <option>福山</option>
+  <option>新尾道</option>
+  <option>三原</option>
+  <option>東広島</option>
+  <option>広島</option>
+  <option>新岩国</option>
+  <option>徳山</option>
+  <option>新山口</option>
+  <option>厚狭</option>
+  <option>新下関</option>
+  <option>小倉</option>
+  <option>博多</option>
+</select>
+　　　
+ <button class="search" onClick="openNewWindow('searchRearch')">検 索</button>
+</div>
+<style>   
+.search{
+    background: linear-gradient(to bottom , #00FFFF , #0000FF);
+	display:inline-block; 
+   width: 110px;
+    height: 35px;
+    border: 1px solid #c18f21;
+    text-align: center;
+    color: #ffffff;
+    font-size:16px;
+
+    border-radius: 10px;		
+}
+</style>
+
+<br>
+<div style="color:red">
+<br>　　　　　　　　　　　　　　ご利用時間は、6時30分から22時30分です。
+</div>
+<br>　　　　　　　　　　　　　※ 空席案内に関するよくある質問についてはこちら
+<br>　　　　　　　　　　　　　※ サービスのご利用に関するよくある質問についてはこちら
+<br>　　　　　　　　　　　　　※ javascriptが無効な場合はこちらの画面を利用してください。
+<br>
+<br>　　　　　　　　　　　
+<img src="./Station.JPG" alt="東京駅" width="360" height=auto border="0" />
+<br>　　　　　　　　　　　
+<script>
+    
+    // 新規Windowの幅や高さなどの指定をすることもできます。X Y 
+    function openNewWindow(Tname) {
+		console.log(Tname);
+ 		switch (Tname) {
+			case "boardingDateMM":
+			// 入力されたキーと値をストレージに保存
+				var key = "boardingDateMM";
+				var data = document.getElementById("rideDateMM").value;
+			// ローカルストレージに保存する
+				localStorage.setItem(key,data);
+			// セッションストレージに保存する
+				sessionStorage.setItem(key,data);
+		        window.open("./boardingDateMM.html", "new", "top=350, left=300, width=223, height=260");
+				break;
+			case "boardingDateDD":
+			// 入力されたキーと値をストレージに保存
+				var key = "boardingDateDD";
+				var data = document.getElementById("rideDateDD").value;
+			// ローカルストレージに保存する
+				localStorage.setItem(key,data);
+			// セッションストレージに保存する
+				sessionStorage.setItem(key,data);
+
+		        window.open("./boardingDateDD.html", "new", "top=350, left=421, width=220, height=260");
+				break;
+			case "rideTimeHH":
+				var key = "rideTimeHH";
+				var data = document.getElementById("rideTimeHH").value;
+			// ローカルストレージに保存する
+				localStorage.setItem(key,data);
+			// セッションストレージに保存する
+				sessionStorage.setItem(key,data);
+
+		        window.open("./rideTimeHH.html", "new", "top=373, left=300, width=220, height=300");
+				break;
+
+			case "rideTimeMM":
+				var key = "rideTimeMM";
+				var data = document.getElementById("rideTimeMM").value;
+			// ローカルストレージに保存する
+				localStorage.setItem(key,data);
+			// セッションストレージに保存する
+				sessionStorage.setItem(key,data);
+
+		        window.open("./rideTimeMM.html", "new", "top=373, left=421, width=204, height=192");
+				break;
+
+			case "rideTrain":
+				var key = "rideTrain";
+				var data = document.getElementById("rideTrain").value;
+			// ローカルストレージに保存する
+				localStorage.setItem(key,data);
+			// セッションストレージに保存する
+				sessionStorage.setItem(key,data);
+		        window.open("./rideTrain.html", "new", "top=400, left=250, width=347, height=250");
+				break;
+
+		//乗車駅ボタンが押された場合;
+			case "rideStaion":
+
+				/*          乗車駅と降車駅の表示パターン  */
+				var key = "diaplay_mode";
+				var data = "diaplay_start";
+				localStorage.setItem(key,data);
+				sessionStorage.setItem(key,data);
+		        window.open("./rideStaion.html", "new", "top=500, left=310, width=374, height=248");
+				break;
+
+		//降車駅ボタンが押された場合;
+			case "getoffStaion":
+
+				/*          乗車駅と降車駅の表示パターン  */
+				var key = "diaplay_mode";
+				var data = "diaplay_end";
+				localStorage.setItem(key,data);
+				sessionStorage.setItem(key,data);
+		        window.open("./rideStaion.html", "new", "top=500, left=410, width=374, height=248");
+				break;
+
+		//検索ボタンが押された場合;
+			case "searchRearch":
+
+		        window.open("./SearchResult.html", "new");
+				break;
+
+		default:
+		//いずれも一致しなかった場合;
+			alert("いずれも一致しなかった！");
+			console.log("いずれも一致しなかった");
+			break;
+		}
+	}	
+</script>
+<br>　　　　　　　　　　　LocalStorage（ローカルストレージ）を反映させる
+<br>
+  <input id="Storagebutton" type="button" value="反映ボタン"/>
+  <input id="button02" type="button" value="ボタン2" />
+  <input id="button03" type="button" value="ボタン3" />
+  
+<br>
+  <hr>
+<span id="message"></span>
+
+
+<br>　　　　　　　　　　　
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#Storagebutton").on('click', function () {
+/*        alert("反映ボタンがクリックされました。");	*/
+/* 		保存しているストレージから入力テキストに値を設定する */
+		var key = "boardingDateMM";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+/*
+		message.innerHTML = 'key: <b>' + key + '</b>'
+		 + '<br>localStorage: <b>' + localData + '</b>'
+		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+*/
+		var element_rideDateMM = document.getElementById('rideDateMM');
+		element_rideDateMM.value = localStorage.getItem(key);
+		console.log(element_rideDateMM.value);
+
+		var key = "boardingDateDD";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+/*		message.innerHTML = 'key: <b>' + key + '</b>'
+		 + '<br>localStorage: <b>' + localData + '</b>'
+		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+*/
+		var element_rideDateDD = document.getElementById('rideDateDD');
+		element_rideDateDD.value = localStorage.getItem(key);
+		console.log(element_rideDateDD.value);
+        
+		var key = "rideTimeHH";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+/*		
+		message.innerHTML = 'key: <b>' + key + '</b>'
+		 + '<br>localStorage: <b>' + localData + '</b>'
+		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+*/
+		var element_rideTimeHH = document.getElementById('rideTimeHH');
+		element_rideTimeHH.value = localStorage.getItem(key);
+		console.log(element_rideTimeHH.value);
+        
+        
+		var key = "rideTimeMM";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+/*
+		message.innerHTML = 'key: <b>' + key + '</b>'
+		 + '<br>localStorage: <b>' + localData + '</b>'
+		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+*/
+		var element_rideTimeMM = document.getElementById('rideTimeMM');
+		element_rideTimeMM.value = localStorage.getItem(key);
+		console.log(element_rideTimeMM.value);
+        
+        
+		var key = "rideTrain";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+		message.innerHTML = 'key: <b>' + key + '</b>'
+		 + '<br>localStorage: <b>' + localData + '</b>'
+		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+
+		var element_rideTrain = document.getElementById('rideTrain');
+		element_rideTrain.value = localStorage.getItem(key);
+		console.log(element_rideTrain.value);
+        
+/* 		保存しているストレージから入力テキストに値を設定する */
+		var key = "diaplay_mode";
+       // 保存された値を取り出す
+		var localData = localStorage.getItem(key);
+		var sessionData = sessionStorage.getItem(key);
+		// キーと値の表示
+
+		switch (localData) {
+				case "none":
+					document.getElementById('displayStation').style.display = 'none';
+					console.log("none　乗車駅と降車駅の表示はしない");
+					
+
+					break;
+
+				case "diaplay_start":
+					document.getElementById('displayStation').style.display = 'block';
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					console.log("diaplay_start　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'none';
+					document.getElementById('b_strat').style.display = 'inline-block';
+					document.getElementById('i_end').style.display   = 'inline-block';
+					document.getElementById('b_end').style.display   = 'none';
+
+					break;
+
+				case "diaplay_end":
+					document.getElementById('displayStation').style.display = 'block';
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					console.log("diaplay_end　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'inline-block';
+					document.getElementById('b_strat').style.display = 'none';
+					document.getElementById('i_end').style.display   = 'none';
+					document.getElementById('b_end').style.display   = 'inline-block';
+
+					var key = "rideStation";
+					// 保存された乗車駅の値を取り出す
+					var localData = localStorage.getItem(key);
+					var sessionData = sessionStorage.getItem(key);
+					// キーと値の表示
+					message.innerHTML = 'key: <b>' + key + '</b>'
+					 + '<br>localStorage: <b>' + localData + '</b>'
+					 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+	
+					var element_i_start = document.getElementById('i_start');
+					element_i_start.value = localStorage.getItem(key);
+
+					break;
+
+				case "diaplay_finish":
+					document.getElementById('displayStation').style.display = 'block';
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					console.log("diaplay_finish　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					document.getElementById('i_start').style.display = 'inline-block';
+					document.getElementById('b_strat').style.display = 'none';
+					document.getElementById('i_end').style.display   = 'inline-block';
+					document.getElementById('b_end').style.display   = 'none';
+
+					var key = "getoffStation";
+					// 保存された降車駅の値を取り出す
+					var localData = localStorage.getItem(key);
+					var sessionData = sessionStorage.getItem(key);
+					// キーと値の表示
+					message.innerHTML = 'key: <b>' + key + '</b>'
+					 + '<br>localStorage: <b>' + localData + '</b>'
+					 + '<br>sessionStorage: <b>' + sessionData + '</b>';
+
+					var element_i_end = document.getElementById('i_end');
+					element_i_end.value = localStorage.getItem(key);
+
+					break;
+
+				default:
+				//いずれも一致しなかった場合;
+					alert("いずれも一致しなかった！");
+					console.log("いずれも一致しなかった");
+					break;
+		}
+        
+      });
+      $("#button02").on('click', function () {
+        alert("ボタン2がクリックされました。");
+      });
+      $("#button03").on('click', function () {
+        alert("ボタン3がクリックされました。");
+      });
+
+    })
+  </script>
+  
+
+</body>
+</html>
