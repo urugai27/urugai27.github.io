@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<title>乗車駅の入力</title>
+<style>
+ form {
+  width: 340px;
+  padding:8px;			/*ボックス内側の余白 */
+  white-space: nowrap;  /*半角スペース、タブ、改行をブラウザでどのように表示させるかを決めます。:折り返しされない*/
+  border: solid 1px #ff0000; /*赤色 */
+  
+  background-color : #F2F2F2 ;		/*背景色を薄い灰色 */
+}	
+</style>
+<script>
+    function proc() {				/*ページが最初に開いたとき */
+
+			// セッションの初めか判断する
+		if (sessionStorage.getItem("rideStation")  ==  null){	
+//			alert("ページが最初に開きます！");
+			
+
+			var key = "diaplay_mode";
+			// 保存された値を取り出す
+			var localData = localStorage.getItem(key);
+			var sessionData = sessionStorage.getItem(key);
+
+
+		};
+
+    }
+</script>
+
+</head>
+<body onload="proc();">				<!-- bodyタグのonloadに記述する方法 -->
+<form name="form1">
+入力値を入力してください
+<!--
+<br>
+<input id="rideStation"  type="text" value="１２３４５６７８９０１２３４５６７８９０１２３４" size="24" style="width:331px;" name="rideStation">
+-->
+<br>
+<input id="rideStation"  type="text" value="" size="25" style="width:331px;" name="rideStation">
+
+<br>
+<select name="keybord" size="5">
+<option value="add">add　　　　　　　　　　　　　　　　　　　　　　</option>
+<option value="alt">alt</option>
+<option value="left">left</option>
+<option value="rait">rait</option>
+<option value="back">back</option>
+<option value="caps">caps</option>
+<option value="NumLock">NumLock</option>
+</select>
+<br>
+<input type="checkbox" name="q1" value="その1">パスワードを入力
+<input type="checkbox" name="q2" value="その2">フィールドを削除する
+<br>入力を完了した後、Enterキーを押します
+<br>
+<!--
+<input type="button" onclick="window.close();"  value="ＯＫ">
+-->
+</form>
+<script>
+    const input     = document.getElementById("rideStation");
+             
+    input.addEventListener("keydown", (e) => {
+        if( e.keyCode === 13 ){
+                console.log("Enter");
+
+                var str = document.getElementById("rideStation");
+				console.log(str.value);
+				
+				var key = "diaplay_mode";
+				// 保存された値を取り出す
+				var localData = localStorage.getItem(key);
+				var sessionData = sessionStorage.getItem(key);
+
+				console.log(localData);
+				
+				switch (localData) {
+
+					case "diaplay_start":
+					// 入力された乗車駅の値をローカルストレージに保存する
+						var key = "rideStation";
+						var data = str.value;
+						localStorage.setItem(key,data);
+						sessionStorage.setItem(key,data);
+
+						// 親ウィンドウのオブジェクトを操作
+						window.opener.document.form1.startStation.value = data;
+
+					/*          乗車駅と降車駅の表示パターン  */
+						var key = "diaplay_mode";
+						var data = "diaplay_end";
+						localStorage.setItem(key,data);
+						sessionStorage.setItem(key,data);
+
+						break;
+							
+					case "diaplay_end":
+					// 入力された乗車駅の値をローカルストレージに保存する
+						var key = "getoffStation";
+						var data = str.value;
+						localStorage.setItem(key,data);
+						sessionStorage.setItem(key,data);
+
+						// 親ウィンドウのオブジェクトを操作
+						window.opener.document.form1.endStation.value = data;
+
+					/*          乗車駅と降車駅の表示パターン  */
+						var key = "diaplay_mode";
+						var data = "diaplay_finish";
+						localStorage.setItem(key,data);
+						sessionStorage.setItem(key,data);
+
+						break;
+
+					default:
+				//いずれも一致しなかった場合;
+						alert("いずれも一致しなかった！");
+						console.log("いずれも一致しなかった");
+						break;
+					}
+
+			    // 親ウィンドウの関数を操作
+			    window.opener.parentFunc( );
+
+                window.close();	
+        }
+    });
+</script>
+</body>
+</html>
