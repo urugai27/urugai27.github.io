@@ -300,7 +300,7 @@
  <input type="button"  id="b_strat" value="　　　乗車駅ボタン　　　" onclick="Button_rideStaion()">
 →
 <!-- 降車駅 -->
- <input type="text"  id="i_end"   size="20" maxlength="10" name="endStation">
+ <input type="text"  id="i_end"   size="20" maxlength="10" name="endStation"  onchange="endStation_changeEvent()">>
  <input type="button"  id="b_end" value="　　　降車駅ボタン　　　" onclick="Button_getoffStaion()">
 　
  <button onClick="">乗車駅逆転</button>
@@ -487,6 +487,7 @@ function startStation_changeEvent(){
 // 	alert("列車 のぞみ changeEvent！");
 			var str = document.getElementById('i_start');
 			console.log(str.value);
+			sessionStorage.setItem("i_start",document.getElementById('i_start').value);
 
 			document.getElementById('i_start').style.display = 'inline-block';
 			document.getElementById('b_strat').style.display = 'none';
@@ -519,6 +520,15 @@ function startStation_changeEvent(){
 
 	};
 
+</script>
+<script>
+function endStation_changeEvent(){
+// 	alert("降車駅の入力 changeEvent！");
+			var str = document.getElementById('i_end');
+			console.log(str.value);
+			sessionStorage.setItem("i_end",document.getElementById('i_end').value);
+
+};
 </script>
 
 </body>
