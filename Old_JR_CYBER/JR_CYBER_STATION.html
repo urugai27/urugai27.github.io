@@ -34,7 +34,7 @@
 
     function InputSave() {
 
-				sessionStorage.setItem("rideDateMM",document.getElementById('rideDateMM'));
+				sessionStorage.setItem("rideDateMM",document.getElementById('rideDateMM').value);
 
 				var key = "rideDateDD";
 				var data = document.getElementById('rideDateDD').value;
@@ -283,7 +283,7 @@
  <input type="button"  id="b_strat" value="　　　乗車駅ボタン　　　" onclick="Button_rideStaion()">
 →
 <!-- 降車駅 -->
- <input type="text"  id="i_end"   size="20" maxlength="10" name="endStation"  onchange="endStation_changeEvent()">>
+ <input type="text"  id="i_end"   size="20" maxlength="10" name="endStation"  onchange="endStation_changeEvent()">
  <input type="button"  id="b_end" value="　　　降車駅ボタン　　　" onclick="Button_getoffStaion()">
 　
  <button onClick="">乗車駅逆転</button>
