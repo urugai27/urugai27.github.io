@@ -3,11 +3,17 @@
 <html>
     <head>
 	<meta charset="utf-8">
-	
 	<title>はじめての簡単 RPA Uipath 入門の新幹線の空席案内</title>
-<!-- ライブラリ読み込み -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+	<style>
+#text-button {
+  display: block;
+  cursor: pointer;
+  width: 160px;
+  text-align: center;
+  border: 1px solid #232323;
+  padding: 10px;
+}
+</style>
 <style>
 
 /* 入力 乗車駅   ボタンから入力の非表示と表示の切替 */
@@ -20,140 +26,174 @@
 
 </style>
 	
-	<style>
-   #displayStation { display: none; }     /* 非表示 */
-/* #displayStation { display: block; } */ /* インラインで表示 */
-
-</style>
+<!-- ライブラリ読み込み -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    function proc() {				/*ページが最初に開いたとき */
+/*     グローバルスコープ 関数 変数  */
 
-			// セッションの初めか判断する
-		if (sessionStorage.getItem("boardingDateMM")  ==  null){	
-//			alert("ページが最初に開きます！");
+
+    function InputSave() {
+
+				sessionStorage.setItem("rideDateMM",document.getElementById('rideDateMM'));
+
+				var key = "rideDateDD";
+				var data = document.getElementById('rideDateDD').value;
+				sessionStorage.setItem(key,data);
+				
+				sessionStorage.setItem("rideDateMM",document.getElementById('rideDateMM').value);
+				
+				sessionStorage.setItem("rideTimeHH",document.getElementById('rideTimeHH').value);
+				sessionStorage.setItem("rideTimeMM",document.getElementById('rideTimeMM').value);
+
+				sessionStorage.setItem("rideTrain",document.getElementById('rideTrain').value);
+
+				sessionStorage.setItem("i_start",document.getElementById('i_start').value);
+				sessionStorage.setItem("i_end",document.getElementById('i_end').value);
+
+				
+				var  obj = document.getElementById('rideTrain');		/*オブジェクト取得*/
+				var idx = obj.selectedIndex;							//インデックス番号を取得
+				var val = obj.options[idx].value; 						//value値を取得
+				var txt = obj.options[idx].text; 						//ラベルを取得
+
+				var key = "rideTrain";
+				sessionStorage.setItem(key,txt);						/* ラベルの内容を格納する場合 今回はなし */
+
+				sessionStorage.setItem("rideTrain",document.getElementById('rideTrain').value);
+
+				
+
+
+
+	}
+    function InputRecaver() {
+
+			var  element_rideDateDD = document.getElementById('rideDateDD');
+			element_rideDateDD.value = sessionStorage.getItem("rideDateDD");
+
+			var  element_rideDateMM = document.getElementById('rideDateMM');
+			element_rideDateMM.value = sessionStorage.getItem("rideDateMM");
 			
-			var element_rideDateMM = document.getElementById('rideDateMM');
-			element_rideDateMM.value = "11";
-			var key = "boardingDateMM";
-			var data = "11";
-			// ローカルストレージに保存する
-			localStorage.setItem(key,data);
-			// セッションストレージに保存する
-			sessionStorage.setItem(key,data);
+			var  element_rideTimeHH = document.getElementById('rideTimeHH');
+			element_rideTimeHH.value = sessionStorage.getItem("rideTimeHH");
+			var  element_rideTimeMM = document.getElementById('rideTimeMM');
+			element_rideTimeMM.value = sessionStorage.getItem("rideTimeMM");
+			
+			var  element_rideTrain = document.getElementById('rideTrain');
+			element_rideTrain.value = sessionStorage.getItem("rideTrain");
+			
+			
+			var  element_i_start = document.getElementById('i_start');
+			element_i_start.value = sessionStorage.getItem("i_start");
+			var  element_i_end = document.getElementById('i_end');
+			element_i_end.value = sessionStorage.getItem("i_end");
 
-			var element_rideDateDD = document.getElementById('rideDateDD');
-			element_rideDateDD.value = "03";
-			var key = "boardingDateDD";
-			var data = "03";
-			// ローカルストレージに保存する
-			localStorage.setItem(key,data);
-			// セッションストレージに保存する
-			sessionStorage.setItem(key,data);
+       // ここから画面の表示を制御する
 
+       // 保存された値を取り出す
+		var sessionData = sessionStorage.getItem("diaplay_mode");
+		// キーと値の表示
 
-			var element_rideTimeHH = document.getElementById('rideTimeHH');
-			element_rideTimeHH.value = "22";
-			var key = "rideTimeHH";
-			var data = "22";
-			localStorage.setItem(key,data);
-			sessionStorage.setItem(key,data);
-
-			var element_rideTimeMM = document.getElementById('rideTimeMM');
-			element_rideTimeMM.value = "20";
-			var key = "rideTimeMM";
-			var data = "20";
-			localStorage.setItem(key,data);
-			sessionStorage.setItem(key,data);
-
-			var element_rideTrain = document.getElementById('rideTrain');
-			element_rideTrain.value = "選択してください";
-			var key = "rideTrain";
-			var data = "選択してください";
-			localStorage.setItem(key,data);
-			sessionStorage.setItem(key,data);
-
-/*          乗車駅と降車駅の表示パターン  */
-			var key = "diaplay_mode";
-			var data = "none";
-			localStorage.setItem(key,data);
-			sessionStorage.setItem(key,data);
-
-		}else{
-
-//			alert("ステップ８３ ページが開きます！");
-			// セッションの初め出ない場合は、退避した値を設定する
-			// 指定しない場合はvalueの値（初期）がされるため
-		
-			var element_rideDateMM = document.getElementById('rideDateMM');
-			element_rideDateMM.value = localStorage.getItem('boardingDateMM');
-			var element_rideDateDD = document.getElementById('rideDateDD');
-			element_rideDateDD.value = localStorage.getItem('boardingDateDD');
-
-			var element_rideTimeHH = document.getElementById('rideTimeHH');
-			element_rideTimeHH.value = localStorage.getItem('rideTimeHH');
-			var element_rideTimeMM = document.getElementById('rideTimeMM');
-			element_rideTimeMM.value = localStorage.getItem('rideTimeMM');
-
-		};
-
-    }
-/* 子画面から 起動する*/        
-function  parentFunc()
-{
-//			alert("ステップ１５４ 乗車駅と降車駅の表示を判定の処理を行います");
-/*  		乗車駅と降車駅の表示を判定する*/
-			var key = "diaplay_mode";
-			var localData = localStorage.getItem(key);
-
-			switch (localData) {
+		switch (sessionData) {
 				case "none":
 					document.getElementById('displayStation').style.display = 'none';
+					console.log("none　乗車駅と降車駅の表示はしない");
+					
+
 					break;
+
 				case "diaplay_start":
-				/*	alert("乗車駅と降車駅の表示する");	*/
 					document.getElementById('displayStation').style.display = 'block';
-				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					console.log("diaplay_start　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
 					document.getElementById('i_start').style.display = 'none';
 					document.getElementById('b_strat').style.display = 'inline-block';
 					document.getElementById('i_end').style.display   = 'inline-block';
 					document.getElementById('b_end').style.display   = 'none';
+
 					break;
 
 				case "diaplay_end":
 					document.getElementById('displayStation').style.display = 'block';
-				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+				/*	alert("乗車駅と降車駅の表示する");	*/
+					console.log("diaplay_end　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
 					document.getElementById('i_start').style.display = 'inline-block';
 					document.getElementById('b_strat').style.display = 'none';
 					document.getElementById('i_end').style.display   = 'none';
 					document.getElementById('b_end').style.display   = 'inline-block';
 
 					var key = "rideStation";
+					// 保存された乗車駅の値を取り出す
 					var localData = localStorage.getItem(key);
 					var sessionData = sessionStorage.getItem(key);
+	
 					var element_i_start = document.getElementById('i_start');
 					element_i_start.value = localStorage.getItem(key);
+
 					break;
 
 				case "diaplay_finish":
 					document.getElementById('displayStation').style.display = 'block';
 				/*	alert("乗車駅と降車駅の表示する");	*/
-				/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+					console.log("diaplay_finish　乗車駅と降車駅の表示する");
+
+		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
 					document.getElementById('i_start').style.display = 'inline-block';
 					document.getElementById('b_strat').style.display = 'none';
 					document.getElementById('i_end').style.display   = 'inline-block';
 					document.getElementById('b_end').style.display   = 'none';
+
 					var key = "getoffStation";
 					// 保存された降車駅の値を取り出す
 					var localData = localStorage.getItem(key);
 					var sessionData = sessionStorage.getItem(key);
+					// キーと値の表示
 					var element_i_end = document.getElementById('i_end');
 					element_i_end.value = localStorage.getItem(key);
+
 					break;
 
-			};
+				default:
+				//いずれも一致しなかった場合;
+					alert("いずれも一致しなかった！");
+					console.log("いずれも一致しなかった");
+					break;
+		}
+ 
+	}	
+    function proc() {				/*ページが最初に開いたとき */
+			// セッションの初めか判断する
+/*		var key = "diaplay_mode";
+       // 保存された値を取り出す
+		var sessionData = sessionStorage.getItem(key);	*/
 
-}
+		if (sessionStorage.getItem("diaplay_mode")  ==  null){	
+//				alert("セッション開始です！");
+				var key = "diaplay_mode";
+				var data = "none";
+				localStorage.setItem(key,data);
+				sessionStorage.setItem("diaplay_mode","none");
+
+				document.getElementById('displayStation').style.display = 'none';
+				console.log("none　乗車駅と降車駅の一覧表示はしない");
+
+			
+		}else{
+		
+			InputRecaver();			/* 前のトランザクションの入力を復元する */
+
+
+		};
+
+    }
+
+
 </script>
+
 
     </head>
 <body onload="proc();">				<!-- bodyタグのonloadに記述する方法 -->
@@ -164,40 +204,106 @@ function  parentFunc()
 <br>　　　　　　　　　　　　ご希望の内容を入力して、検索ボタンをクリックして下さい
 <br>
 <br>　　■ 乗車月日　　　　　　　　　　　
-<!--  left: 306.875 top: 220.78125 -->
-<input id="rideDateMM"  type="text" value="11" size="2" style="width:20px;" name="rideDateMM">
-<button onClick="openNewWindow('boardingDateMM')">▼</button>
-
-月
-<input id="rideDateDD"  type="text" value="10" size="2" style="width:20px;" name="rideDateDD">
-<button onClick="openNewWindow('boardingDateDD')">▼</button>
-日
+<select id="rideDateMM" name="rideDateMM">
+<option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11" selected>11</option>
+<option value="12">12</option>
+</select>月
+<select id="rideDateDD" name="rideDateDD">
+<option value="01">01</option>
+<option value="02">02</option>
+<option value="03" selected>03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>日
 
 <br>　　■ 乗車時刻　　　　　　　　　　　
-<input id="rideTimeHH"  type="text" value="13" size="2" style="width:20px;" name="rideTimeHH">
-<button onClick="openNewWindow('rideTimeHH')">▼</button>
-時
-<input id="rideTimeMM"  type="text" value="30" size="2" style="width:20px;" name="rideTimeMM">
-<button onClick="openNewWindow('rideTimeMM')">▼</button>
-分
+<select  id="rideTimeHH" name="rideTimeHH">
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22" selected>22</option>
+</select>時
+<select  id="rideTimeMM" name="rideTimeMM">
+<option value="00">00</option>
+<option value="10">10</option>
+<option value="20" selected>20</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+</select>分
 
 <br>　　■ お乗りになる列車
-<input id="rideTrain"  type="text" value="選択してください" size="20" style="width:400px;" name="rideTrain">
-<button onClick="openNewWindow('rideTrain')">▼</button>
+<select id="rideTrain" name="rideTrain" onchange="rideTrain_changeEvent()">
+<option value="0">選択してください</option>
+<option value="1">のぞみ・ひかり・みずほ・さくら・つばめ</option>
+<option value="2">こだま</option>
+<option value="3">はやぶさ・はやて・やまびこ・なすの・つばさ・こまち</option>
+<option value="4">とき・たにがわ・かがやき・はくたか・あさま・つるぎ</option>
+<option value="5">在来線</option>
+</select>
 
 <br>　　■ 乗車駅・降車駅
 <br>　　　　　　　　　　　　　　　　乗車駅・降車駅は
 <br>　　　　　　　　　　　　　　　　漢字・カタカナ・ひらがなで入力してください。
 <br>　　　　　　　　　　
 <!-- 乗車駅 -->
- <input type="text" id="i_start" value="　　　　　　　　　　　"  name="startStation">
- <input type="button"  id="b_strat" value="　　　乗車駅ボタン　　　" onclick="openNewWindow('rideStaion')">
+ <input type="text"  id="i_start" size="20" maxlength="10" name="startStation"  onchange="startStation_changeEvent()">
+ <input type="button"  id="b_strat" value="　　　乗車駅ボタン　　　" onclick="Button_rideStaion()">
 →
 <!-- 降車駅 -->
- <input type="text" id="i_end" value="　　　　　　　　　　　"  name="endStation">
- <input type="button"  id="b_end" value="　　　降車駅ボタン　　　" onclick="openNewWindow('getoffStaion')">
+ <input type="text"  id="i_end"   size="20" maxlength="10" name="endStation">
+ <input type="button"  id="b_end" value="　　　降車駅ボタン　　　" onclick="Button_getoffStaion()">
 　
- <button onClick="openNewWindow()">乗車駅逆転</button>
+ <button onClick="">乗車駅逆転</button>
  
 <div   id="displayStation">
 　　　　　　　　　　　　　　
@@ -276,9 +382,12 @@ function  parentFunc()
   <option>小倉</option>
   <option>博多</option>
 </select>
-　　　
- <button class="search" onClick="openNewWindow('searchRearch')">検 索</button>
+<br>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+<!--   onclick属性にreturnを指定しイベントを中断させる すると遷移命令が有効になる 2023.06.26 
+<button class="search" onClick="openNewWindow();return false">検 索</button>  -->
+<button class="search" onClick="openNewWindow()">検 索</button>
 </div>
+
 <style>   
 .search{
     background: linear-gradient(to bottom , #00FFFF , #0000FF);
@@ -304,285 +413,113 @@ function  parentFunc()
 <br>
 <br>　　　　　　　　　　　
 <img src="./Station.JPG" alt="東京駅" width="360" height=auto border="0" />
-<br>　　　　　　　　　　　
+
+
 <script>
     
-    // 新規Windowの幅や高さなどの指定をすることもできます。X Y 
-    function openNewWindow(Tname) {
-		console.log(Tname);
- 		switch (Tname) {
-			case "boardingDateMM":
-			// 入力されたキーと値をストレージに保存
-				var key = "boardingDateMM";
-				var data = document.getElementById("rideDateMM").value;
-			// ローカルストレージに保存する
-				localStorage.setItem(key,data);
-			// セッションストレージに保存する
-				sessionStorage.setItem(key,data);
-		        window.open("./boardingDateMM.html", "new", "top=350, left=300, width=223, height=260");
-				break;
-			case "boardingDateDD":
-			// 入力されたキーと値をストレージに保存
-				var key = "boardingDateDD";
-				var data = document.getElementById("rideDateDD").value;
-			// ローカルストレージに保存する
-				localStorage.setItem(key,data);
-			// セッションストレージに保存する
-				sessionStorage.setItem(key,data);
+    function openNewWindow() {
 
-		        window.open("./boardingDateDD.html", "new", "top=350, left=421, width=220, height=260");
-				break;
-			case "rideTimeHH":
-				var key = "rideTimeHH";
-				var data = document.getElementById("rideTimeHH").value;
-			// ローカルストレージに保存する
-				localStorage.setItem(key,data);
-			// セッションストレージに保存する
-				sessionStorage.setItem(key,data);
+   			InputSave();			/* トランザクションの入力を退避する */
 
-		        window.open("./rideTimeHH.html", "new", "top=373, left=300, width=220, height=300");
-				break;
+	        window.open("./SearchResult.html");	
+/*2023.06.27 元に戻す	 	    document.location.href = "./SearchResult.html";	  */
 
-			case "rideTimeMM":
-				var key = "rideTimeMM";
-				var data = document.getElementById("rideTimeMM").value;
-			// ローカルストレージに保存する
-				localStorage.setItem(key,data);
-			// セッションストレージに保存する
-				sessionStorage.setItem(key,data);
+    }
+    
+	$(document).keyup(function(event) {
+	   	 if (event.which === 13) {
+//	        alert('Enter is pressed!');
+	        
+   			InputSave();			/* トランザクションの入力を退避する */
 
-		        window.open("./rideTimeMM.html", "new", "top=373, left=421, width=204, height=192");
-				break;
+	    }
+	});
 
-			case "rideTrain":
-				var key = "rideTrain";
-				var data = document.getElementById("rideTrain").value;
-			// ローカルストレージに保存する
-				localStorage.setItem(key,data);
-			// セッションストレージに保存する
-				sessionStorage.setItem(key,data);
-		        window.open("./rideTrain.html", "new", "top=400, left=250, width=347, height=250");
-				break;
-
-		//乗車駅ボタンが押された場合;
-			case "rideStaion":
-
-				/*          乗車駅と降車駅の表示パターン  */
-				var key = "diaplay_mode";
-				var data = "diaplay_start";
-				localStorage.setItem(key,data);
-				sessionStorage.setItem(key,data);
-		        window.open("./rideStaion.html", "new", "top=500, left=310, width=374, height=248");
-				break;
-
-		//降車駅ボタンが押された場合;
-			case "getoffStaion":
-
-				/*          乗車駅と降車駅の表示パターン  */
-				var key = "diaplay_mode";
-				var data = "diaplay_end";
-				localStorage.setItem(key,data);
-				sessionStorage.setItem(key,data);
-		        window.open("./rideStaion.html", "new", "top=500, left=410, width=374, height=248");
-				break;
-
-		//検索ボタンが押された場合;
-			case "searchRearch":
-
-		        window.open("./SearchResult.html", "new");
-				break;
-
-		default:
-		//いずれも一致しなかった場合;
-			alert("いずれも一致しなかった！");
-			console.log("いずれも一致しなかった");
-			break;
-		}
-	}	
 </script>
-<br>　　　　　　　　　　　LocalStorage（ローカルストレージ）を反映させる
-<br>
-  <input id="Storagebutton" type="button" value="反映ボタン"/>
-  <input id="button02" type="button" value="ボタン2" />
-  <input id="button03" type="button" value="ボタン3" />
-  
-<br>
-  <hr>
-<span id="message"></span>
+<script>
 
+//JavaScript _ changeイベント：フォームや選択メニューが変更されたとき 注！ 先頭に記述すると
+//Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')でエラーになる
+	function rideTrain_changeEvent(){							/*列車がセレクトされたとき*/
+		var str = document.getElementById('rideTrain');
+		console.log(str.value);
+		if (str.value == "1"){
+//	 	 	alert("列車 のぞみ changeEvent！");
+			sessionStorage.setItem("diaplay_mode","diaplay_start");
+			sessionStorage.setItem("rideTrain",document.getElementById('rideTrain').value);
 
-<br>　　　　　　　　　　　
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $("#Storagebutton").on('click', function () {
-/*        alert("反映ボタンがクリックされました。");	*/
-/* 		保存しているストレージから入力テキストに値を設定する */
-		var key = "boardingDateMM";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-/*
-		message.innerHTML = 'key: <b>' + key + '</b>'
-		 + '<br>localStorage: <b>' + localData + '</b>'
-		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-*/
-		var element_rideDateMM = document.getElementById('rideDateMM');
-		element_rideDateMM.value = localStorage.getItem(key);
-		console.log(element_rideDateMM.value);
+			document.getElementById('displayStation').style.display = 'block';
+			/*	alert("乗車駅と降車駅の表示する");	*/
+			console.log("diaplay_start　乗車駅と降車駅ボタンの表示する");
+			/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
+			document.getElementById('i_start').style.display = 'none';
+			document.getElementById('b_strat').style.display = 'inline-block';
+			document.getElementById('i_end').style.display   = 'inline-block';
+			document.getElementById('b_end').style.display   = 'none';
 
-		var key = "boardingDateDD";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-/*		message.innerHTML = 'key: <b>' + key + '</b>'
-		 + '<br>localStorage: <b>' + localData + '</b>'
-		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-*/
-		var element_rideDateDD = document.getElementById('rideDateDD');
-		element_rideDateDD.value = localStorage.getItem(key);
-		console.log(element_rideDateDD.value);
-        
-		var key = "rideTimeHH";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-/*		
-		message.innerHTML = 'key: <b>' + key + '</b>'
-		 + '<br>localStorage: <b>' + localData + '</b>'
-		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-*/
-		var element_rideTimeHH = document.getElementById('rideTimeHH');
-		element_rideTimeHH.value = localStorage.getItem(key);
-		console.log(element_rideTimeHH.value);
-        
-        
-		var key = "rideTimeMM";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-/*
-		message.innerHTML = 'key: <b>' + key + '</b>'
-		 + '<br>localStorage: <b>' + localData + '</b>'
-		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-*/
-		var element_rideTimeMM = document.getElementById('rideTimeMM');
-		element_rideTimeMM.value = localStorage.getItem(key);
-		console.log(element_rideTimeMM.value);
-        
-        
-		var key = "rideTrain";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-		message.innerHTML = 'key: <b>' + key + '</b>'
-		 + '<br>localStorage: <b>' + localData + '</b>'
-		 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-
-		var element_rideTrain = document.getElementById('rideTrain');
-		element_rideTrain.value = localStorage.getItem(key);
-		console.log(element_rideTrain.value);
-        
-/* 		保存しているストレージから入力テキストに値を設定する */
-		var key = "diaplay_mode";
-       // 保存された値を取り出す
-		var localData = localStorage.getItem(key);
-		var sessionData = sessionStorage.getItem(key);
-		// キーと値の表示
-
-		switch (localData) {
-				case "none":
-					document.getElementById('displayStation').style.display = 'none';
-					console.log("none　乗車駅と降車駅の表示はしない");
-					
-
-					break;
-
-				case "diaplay_start":
-					document.getElementById('displayStation').style.display = 'block';
-				/*	alert("乗車駅と降車駅の表示する");	*/
-					console.log("diaplay_start　乗車駅と降車駅の表示する");
-
-		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
-					document.getElementById('i_start').style.display = 'none';
-					document.getElementById('b_strat').style.display = 'inline-block';
-					document.getElementById('i_end').style.display   = 'inline-block';
-					document.getElementById('b_end').style.display   = 'none';
-
-					break;
-
-				case "diaplay_end":
-					document.getElementById('displayStation').style.display = 'block';
-				/*	alert("乗車駅と降車駅の表示する");	*/
-					console.log("diaplay_end　乗車駅と降車駅の表示する");
-
-		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
-					document.getElementById('i_start').style.display = 'inline-block';
-					document.getElementById('b_strat').style.display = 'none';
-					document.getElementById('i_end').style.display   = 'none';
-					document.getElementById('b_end').style.display   = 'inline-block';
-
-					var key = "rideStation";
-					// 保存された乗車駅の値を取り出す
-					var localData = localStorage.getItem(key);
-					var sessionData = sessionStorage.getItem(key);
-					// キーと値の表示
-					message.innerHTML = 'key: <b>' + key + '</b>'
-					 + '<br>localStorage: <b>' + localData + '</b>'
-					 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-	
-					var element_i_start = document.getElementById('i_start');
-					element_i_start.value = localStorage.getItem(key);
-
-					break;
-
-				case "diaplay_finish":
-					document.getElementById('displayStation').style.display = 'block';
-				/*	alert("乗車駅と降車駅の表示する");	*/
-					console.log("diaplay_finish　乗車駅と降車駅の表示する");
-
-		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
-					document.getElementById('i_start').style.display = 'inline-block';
-					document.getElementById('b_strat').style.display = 'none';
-					document.getElementById('i_end').style.display   = 'inline-block';
-					document.getElementById('b_end').style.display   = 'none';
-
-					var key = "getoffStation";
-					// 保存された降車駅の値を取り出す
-					var localData = localStorage.getItem(key);
-					var sessionData = sessionStorage.getItem(key);
-					// キーと値の表示
-					message.innerHTML = 'key: <b>' + key + '</b>'
-					 + '<br>localStorage: <b>' + localData + '</b>'
-					 + '<br>sessionStorage: <b>' + sessionData + '</b>';
-
-					var element_i_end = document.getElementById('i_end');
-					element_i_end.value = localStorage.getItem(key);
-
-					break;
-
-				default:
-				//いずれも一致しなかった場合;
-					alert("いずれも一致しなかった！");
-					console.log("いずれも一致しなかった");
-					break;
 		}
-        
-      });
-      $("#button02").on('click', function () {
-        alert("ボタン2がクリックされました。");
-      });
-      $("#button03").on('click', function () {
-        alert("ボタン3がクリックされました。");
-      });
+	};
+</script>
+<script>
+//			乗車駅 のボタンが押された時
+    
+    function Button_rideStaion() {
 
-    })
-  </script>
-  
+			document.getElementById('displayStation').style.display = 'block';
+//			alert("乗車駅の入力を表示する");
+			console.log("diaplay_end　乗車駅と降車駅の表示する");
+
+		/* 乗車駅は入力と降車駅はボタンの表示する*/
+			document.getElementById('i_start').style.display = 'inline-block';
+			document.getElementById('b_strat').style.display = 'none';
+			document.getElementById('i_end').style.display   = 'none';
+			document.getElementById('b_end').style.display   = 'inline-block';
+
+			sessionStorage.setItem("diaplay_mode","diaplay_end");
+
+
+	};
+
+</script>
+
+<script>
+function startStation_changeEvent(){
+// 	alert("列車 のぞみ changeEvent！");
+			var str = document.getElementById('i_start');
+			console.log(str.value);
+
+			document.getElementById('i_start').style.display = 'inline-block';
+			document.getElementById('b_strat').style.display = 'none';
+			document.getElementById('i_end').style.display   = 'none';
+			document.getElementById('b_end').style.display   = 'inline-block';
+
+			sessionStorage.setItem("diaplay_mode","diaplay_finish");
+
+};
+</script>
+
+
+<script>
+//			降車駅 のボタンが押された時
+    
+    function Button_getoffStaion() {
+
+			document.getElementById('displayStation').style.display = 'block';
+//			alert("降車駅の入力を表示する");
+			console.log("diaplay_finish　乗車駅と降車駅の表示する");
+
+		/* 乗車駅は入力と降車駅も入力の表示する*/
+			document.getElementById('i_start').style.display = 'inline-block';
+			document.getElementById('b_strat').style.display = 'none';
+			document.getElementById('i_end').style.display   = 'inline-block';
+			document.getElementById('b_end').style.display   = 'none';
+
+			sessionStorage.setItem("diaplay_mode","diaplay_finish");
+
+
+	};
+
+</script>
 
 </body>
 </html>
