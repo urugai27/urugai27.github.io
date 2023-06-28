@@ -18,11 +18,11 @@
 
 /* 入力 乗車駅   ボタンから入力の非表示と表示の切替 */
 #i_start { display: inline-block; }   /* インラインブロックで表示 */
-#b_strat { display: none; }           /* インラインブロックで表示 */
+#b_strat { display: none; }           /* 非表示 */
 
 /* 入力 降車駅   ボタンから入力の非表示と表示の切替 */
-#i_end { display: inline-block; }   /* 非表示 */
-#b_end { display: none; }   /* インラインブロックで表示 */
+#i_end { display: inline-block; }     /*インラインブロックで表示 */
+#b_end { display: none; }             /* 非表示 */
 
 </style>
 	
@@ -108,8 +108,8 @@
 					console.log("diaplay_start　乗車駅と降車駅の表示する");
 
 		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
-					document.getElementById('i_start').style.display = 'none';
-					document.getElementById('b_strat').style.display = 'inline-block';
+					document.getElementById('i_start').style.display = 'inline-block';
+					document.getElementById('b_strat').style.display = 'none';
 					document.getElementById('i_end').style.display   = 'inline-block';
 					document.getElementById('b_end').style.display   = 'none';
 
@@ -123,8 +123,8 @@
 		/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
 					document.getElementById('i_start').style.display = 'inline-block';
 					document.getElementById('b_strat').style.display = 'none';
-					document.getElementById('i_end').style.display   = 'none';
-					document.getElementById('b_end').style.display   = 'inline-block';
+					document.getElementById('i_end').style.display   = 'inline-block';
+					document.getElementById('b_end').style.display   = 'none';
 
 					break;
 
@@ -435,11 +435,13 @@
 			/*	alert("乗車駅と降車駅の表示する");	*/
 			console.log("diaplay_start　乗車駅と降車駅ボタンの表示する");
 			/* 乗車駅 と降車駅の表示モードを設定する  乗車駅のボタンを表示する*/
-			document.getElementById('i_start').style.display = 'none';
-			document.getElementById('b_strat').style.display = 'inline-block';
+			document.getElementById('i_start').style.display = 'inline-block';
+			document.getElementById('b_strat').style.display = 'none';
 			document.getElementById('i_end').style.display   = 'inline-block';
 			document.getElementById('b_end').style.display   = 'none';
-
+		}else{
+			sessionStorage.setItem("diaplay_mode","none");
+			document.getElementById('displayStation').style.display = 'none';
 		}
 	};
 </script>
@@ -455,8 +457,8 @@
 		/* 乗車駅は入力と降車駅はボタンの表示する*/
 			document.getElementById('i_start').style.display = 'inline-block';
 			document.getElementById('b_strat').style.display = 'none';
-			document.getElementById('i_end').style.display   = 'none';
-			document.getElementById('b_end').style.display   = 'inline-block';
+			document.getElementById('i_end').style.display   = 'inline-block';
+			document.getElementById('b_end').style.display   =  'none';
 
 			sessionStorage.setItem("diaplay_mode","diaplay_end");
 
@@ -474,8 +476,8 @@ function startStation_changeEvent(){
 
 			document.getElementById('i_start').style.display = 'inline-block';
 			document.getElementById('b_strat').style.display = 'none';
-			document.getElementById('i_end').style.display   = 'none';
-			document.getElementById('b_end').style.display   = 'inline-block';
+			document.getElementById('i_end').style.display   = 'inline-block';
+			document.getElementById('b_end').style.display   = 'none';
 
 			sessionStorage.setItem("diaplay_mode","diaplay_finish");
 
