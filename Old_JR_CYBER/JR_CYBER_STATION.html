@@ -40,7 +40,7 @@
 				var data = document.getElementById('rideDateDD').value;
 				sessionStorage.setItem(key,data);
 				
-				sessionStorage.setItem("rideDateMM",document.getElementById('rideDateMM').value);
+				sessionStorage.setItem("rideDateDD",document.getElementById('rideDateDD').value);
 				
 				sessionStorage.setItem("rideTimeHH",document.getElementById('rideTimeHH').value);
 				sessionStorage.setItem("rideTimeMM",document.getElementById('rideTimeMM').value);
@@ -68,12 +68,12 @@
 	}
     function InputRecaver() {
 
-			var  element_rideDateDD = document.getElementById('rideDateDD');
-			element_rideDateDD.value = sessionStorage.getItem("rideDateDD");
-
 			var  element_rideDateMM = document.getElementById('rideDateMM');
 			element_rideDateMM.value = sessionStorage.getItem("rideDateMM");
 			
+			var  element_rideDateDD = document.getElementById('rideDateDD');
+			element_rideDateDD.value = sessionStorage.getItem("rideDateDD");
+
 			var  element_rideTimeHH = document.getElementById('rideTimeHH');
 			element_rideTimeHH.value = sessionStorage.getItem("rideTimeHH");
 			var  element_rideTimeMM = document.getElementById('rideTimeMM');
@@ -126,14 +126,6 @@
 					document.getElementById('i_end').style.display   = 'none';
 					document.getElementById('b_end').style.display   = 'inline-block';
 
-					var key = "rideStation";
-					// 保存された乗車駅の値を取り出す
-					var localData = localStorage.getItem(key);
-					var sessionData = sessionStorage.getItem(key);
-	
-					var element_i_start = document.getElementById('i_start');
-					element_i_start.value = localStorage.getItem(key);
-
 					break;
 
 				case "diaplay_finish":
@@ -146,14 +138,6 @@
 					document.getElementById('b_strat').style.display = 'none';
 					document.getElementById('i_end').style.display   = 'inline-block';
 					document.getElementById('b_end').style.display   = 'none';
-
-					var key = "getoffStation";
-					// 保存された降車駅の値を取り出す
-					var localData = localStorage.getItem(key);
-					var sessionData = sessionStorage.getItem(key);
-					// キーと値の表示
-					var element_i_end = document.getElementById('i_end');
-					element_i_end.value = localStorage.getItem(key);
 
 					break;
 
