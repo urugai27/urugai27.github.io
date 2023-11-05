@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html>
+    <head>
+	<meta charset="utf-8">
+	<title>MuseScoreのサウンドフォントから個別をサウンドフォントを作成する</title>
+	<link rel="stylesheet" href="SoundFont.css"><!?リセットcssを先に読み込み?>
+    </head>
+<body>
+<h3>MuseScoreのサウンドフォントから個別をサウンドフォントを作成する</h3>
+<br>
+<br>MuseScore4は303に近いサウンドフォントがあります。MuseScore3とファイ
+<br>ル名は違うものの中味はまったく同じです。MuseScore4で利用できるのは楽器
+<br>のみ。MuseScoreの楽譜一覧ではなぜか五百以上もありますが。
+<br>
+<br>作成するために,サウンドフォントを作成するPolyphoneのソフトを利用します。
+<br>※Polyphoneのインストールや使い方はサイトで検索でききるので割愛
+<br>
+<br>大正琴の個別サウンドフォントSF3を作成する手順
+<br>
+<br>1.MuseScore4のサウンドフォントを作業用の複写
+<br>　万が一潰してしまうと再インストールしなければいけなくなるので。
+<br>
+<br>　MuseScore4のサウンドフォントは、ここにあります。
+<br>　C:\Program Files\MuseScore 4\sound\MS Basic.sf3
+<br>	
+<br>
+<br>２．大正琴だけ(Taisyo koko)のサウンドファイル(MScoreTaishoKoto.sf2)を
+<br>　　作成する
+<br>　　
+<br>　　PolyphoneでMS Basic.sf3を開く
+<br>　　
+<img src="./1Plyphone_MScore.JPG" alt="Plyphone" width="550" height=auto border="0" />
+<br>　　
+<br>　　プリセットでTaisyo koko以外を削除する
+<br>　　
+<img src="./2Plyphone_DelPriset.JPG" alt="プリセットを削除" width="550" height=auto border="0" />
+<br>　　
+<br>　　インストゥルメントでTaisyo koko以外を削除する
+<br>　　※全部選択して削除した場合でも、先のプリセットで大正琴が残っている
+<br>　　場合は、警告をだし関係するインストゥルメント消せない。
+<br>　　
+<img src="./3Plyphone_DelInstrument.JPG" alt="楽器" width="550" height=auto border="0" />
+<br>　　
+<br>　　サンプルでも同様にTaisyo koko以外を削除する
+<br>　　※全部選択して削除した場合でも、先のプリセットで大正琴が残っている
+<br>　　場合は、警告をだし関係する関係サンプル消せない。
+<br>　　保存ボタン（フロピーのマーク）を押しファイル名をMScoreTaishoKoto
+<br>　　とし保存する
+<br>　　※なお、ここで作成したものはバンク番号などが,000.000でないので
+<br>　　　Musescore4では個別サウンドフォントとして扱わない 
+<br>　　
+<img src="./4Plyphone_DelISample.JPG" alt="ソース" width="550" height=auto border="0" />
+<br>
+<br>　　
+<br>
+<br>３．バンク番号、プログラム番号を修正する
+<br>
+<br>　　元の大正琴のプリセットを複写し、新しプリセットを作成する
+<br>　　※複写されたプリセットのバンク番号、プログラム番号は000:000になる
+<br>　　元の大正琴のプリセットを削除する
+<br>　　
+<img src="./5Plyphone_Mente.JPG" alt="複写" width="550" height=auto border="0" />
+<br>
+<br>
+<br>　　複写したの大正琴のプリセットの名前を元の名前に戻す
+<br>　　
+<img src="./6lyphone_Rename.JPG" alt="名前を変更" width="550" height=auto border="0" />
+<br>	
+<br>
+<br>４．圧縮ファイルsf3を作成する
+<br>
+<br>　　右上の横三棒を押し、soundfontをエクスポートを選択し、sf3でexport
+<br>　　これで、拡張子がsf3のMScoreTaishoKoto.sf3ができる
+<br>　　
+<img src="./7lyphone_ToSF3.JPG" alt="圧縮" width="550" height=auto border="0" />
+<br>
+</body>
+</html>
