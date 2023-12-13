@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+    <head>
+	<title>ギーマの話 Windows10,11 OS丸ごとバックアップ Macrium Reflect Free </title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    </head>
+    <body oncontextmenu="return false;" bgcolor="#FFCCFF" text="#000000" link="#666666" vlink="#FF0000"  >
+<br>
+<td align="left"><font size="4"><div class="f7">Windows10,11 OS丸ごとバックアップ Macrium Reflect Free<br>
+<br>
+<br>
+<br>古いパソコンを利用している間に、だんだん遅くなり購入時点のＨＤＤを、Ｓ
+<br>ＳＤに切替るため、ＨＤＤを丸ごとＳＳＤに引っ越す無料のソフトを探し実際
+<br>に利用した。２０１７年頃から、『Macrium Reflect Free』を利用している。
+<br>このソフトのクーロンコピーという機能を利用した。ただし、コピー先のＳＳ
+<br>Ｄを再利用したりしていると、クーロンコピーは正常に終了するもののＯＳの
+<br>起動に失敗することが度々あった。ネットをさまよい、探した解決さきはＳＳ
+<br>Ｄを初期化する場合に、diskpartのconvert mbr(ディスクをMBR形式に変換す
+<br>る)を実行するということ。実行を行う時は、慎重に！
+<br>
+<br>diskpartで新品の状態にする(時間は殆どかからない)
+<br>
+<br>　　　diskpart　　　 コマンドプロンプトでDISKPART起動で行う
+<br>　　　list disk　　　接続されたディスクをリスト表示
+<br>　　　　　　　　　　(目的のディスクの番号確認)
+<br>　　　select disk 2　※クローン先のDiskがディスク1の場合
+<br>　　　　　　　　　　　(自身の環境に合わせる)
+<br>　　　clean　　　　　ディスクをクリーンな状態にする
+<br>　　　convert mbr　　ディスクをMBR形式に変換する
+<br>
+<br>あとは、ネットでクーロンコピーの手順が沢山あるのでそれを参考にする。
+<br>
+<br>ところで、2023年07月時点でMacrium Reflectがダウンロードできない！。
+<br>ただし、2023.07.27時点で
+<a href="https://macrium-reflect-free.jp.uptodown.com/windows/versions"  target="_blank"><FONT color="magenta">古いバージョンのMacrium Reflect Free</FONT></a>
+<br>がダウンロードができる。私の場合はディスクに
+<br>macrium-reflect-free-7-1-3169.exe 
+<br>があったのでそれを、インストールし、さらに8へアップグレードし利用できた
+<br>（8もあったが、インストールがなぜかエラーとなった）、いつまでこの手順で
+<br>無料版をインスートルできるかは、分からないが。いい、ソフトである。
+<br>
+<tr>
+</body>
+</html>
