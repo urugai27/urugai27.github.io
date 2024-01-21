@@ -9,10 +9,10 @@
 <body>
     <div id="wrap">
 <h1>うるがいの話　ある日</h1>
-<a href="#label20240120">
+<a href="#label20240121">
 <span class="today_title">
 最新:
-2004年の桜開花宣言
+アルゴリズム
 </span>
 </a>
 <h3>【うるがいの話　ある日】とは　一日だけのプログです</h3>
@@ -79,24 +79,103 @@
 		</td>
 	</tr>
 </table>
-<br>2024年01月20日 (土）<span class="today_title">2004年の桜開花宣言</span>
-<a id="label20240120"></a>
-<br>16:01
+<br>2024年01月21日 (日）<span class="today_title">アルゴリズム</span>
+<a id="label20240121"></a>
+<br>15:05
 <br>
-<a href="./link/20240120_1Sora.html"  target="_blank">  
-<img src="./Reimage/20240120_1Sora.JPG" alt="空" width="75" height="100" border="0" />
+<a href="./link/20240121_1Sora.html"  target="_blank">  
+<img src="./Reimage/20240121_1Sora.JPG" alt="空" width="75" height="100" border="0" />
 </a>
-<br>長袖シャツでは暑ついほどの気温である。ベランダから見える桜は、二桁を超
-<br>える花が咲いている、今年の開花宣言である。テレビでは、八重岳から切り取
-<br>った枝に、かなり花が咲いている。家の桜も早い方だが、とてもとてもである
-<br>。ヨメから勧められネットフリックスで『愛の不時着』を見ている、韓国のド
-<br>ラマは面白い。近頃は、映画よりドラマをみている今日この頃である。そのう
-<br>ち、飽きるのだろうか。ギターは少し飽きて、２週間ほど弾かなかった。動画
-<br>で作成したギタのコードの設定を確認するため、ギターを弾いたら指が痛くて
-<br>痛くて、少しは弾かないといけないと反省する（三線は面倒くさいので弾かな
-<br>いが、ギターコードだけは実機で確認することにしている）。
+<a href="./link/20240121_3Susisou.html"  target="_blank">  
+<img src="./Reimage/20240121_3Susisou.JPG" alt="水槽" width="133" height="100" border="0" />
+</a>
+<br>とある専門書の問題を解いていると、ん！、昔（１０年以上も前）、子供が大
+<br>学で出された演習問題であることに気が付く。
 <br>
-<br>１５時５６分　ビットコインの総資産　￥１７、８７６（↑１３３）
+<a href="./link/20240121_4Mondai.html"  target="_blank">  
+<img src="./Reimage/20240121_4Mondai.JPG" alt="問題" width="502" height="100" border="0" />
+</a>
+<br>ホー、この本を教授は利用していたのだ。この本の演習問題の回答は、意地悪
+<br>なことに本でもネットでも見れないことになっている。あとにも先にも子供か
+<br>ら、宿題の手伝いをさせられたのこの一問だけ。その筋の私は、少し悩んだが
+<br>解いて上げた。いまなら、ＣｈａｔＧＰＴを利用すれば、どうなるか・・・。
+<br>やってみた
+<br><div style="color:blue">
+<br>言語はＪａｖａです。
+<br>
+<br>・キーボードから、整数の値ｎを入力します。
+<br>・第１行目には　（ｉ　－　１）　＊　２　＋　１個の＇＊＇記号を表示して
+<br>最終行である第ｎ行目には　（ｎ　－　１）　＊　２　＋　１個の＇＊＇記号
+<br>を表示するｎ段のピラミッドを表示するプログラムを教えてください。
+<br></div>
+<br><div style="color:red">
+<br>import java.util.Scanner;
+<br>
+<br>public class Pyramid {
+<br>    public static void main(String[] args) {
+<br>        // キーボードから整数nを入力
+<br>        Scanner scanner = new Scanner(System.in);
+<br>        System.out.print("整数nを入力してください: ");
+<br>        int n = scanner.nextInt();
+<br>
+<br>        // ピラミッドを表示
+<br>        for (int i = 1; i <= n; i++) {
+<br>            // 左側の空白を表示
+<br>            for (int j = 1; j <= n - i; j++) {
+<br>                System.out.print(" ");
+<br>            }
+<br>
+<br>            // '*'を表示
+<br>            for (int k = 1; k <= (i - 1) * 2 + 1; k++) {
+<br>                System.out.print("*");
+<br>            }
+<br>
+<br>            // 改行
+<br>            System.out.println();
+<br>        }
+<br>
+<br>        // scannerを閉じる
+<br>        scanner.close();
+<br>    }
+<br>}
+<br></div>
+<br>さすが、模範解答である。とある本の実践を、統合開発環境Eclipsで行って
+<br>いると、scannerが閉じられていませんとワーニングを出す。ＡＩでは、
+<br>『scannerを閉じる』のステップがある。ついでに、言語をcobolに替えたら
+<br><div style="color:red">
+<br>COBOLは行指向の言語であり、他の言語とは異なる構文を持っています。以
+<br>下は、COBOLで要求されたピラミッドを表示するプログラムの例です。
+<br>
+<br>```cobol
+<br>IDENTIFICATION DIVISION.
+<br>PROGRAM-ID. PyramidProgram.
+<br>
+<br>DATA DIVISION.
+<br>WORKING-STORAGE SECTION.
+<br>01 I-NUMBER         PIC 9(3).
+<br>01 J-COUNTER        PIC 9(3).
+<br>01 K-COUNTER        PIC 9(3).
+<br>
+<br>PROCEDURE DIVISION.
+<br>    DISPLAY '整数nを入力してください: '.
+<br>    ACCEPT I-NUMBER.
+<br>
+<br>    PERFORM VARYING J-COUNTER FROM 1 BY 1 UNTIL J-COUNTER > I-NUMBER
+<br>        PERFORM VARYING K-COUNTER FROM 1 BY 1 UNTIL K-COUNTER <= (J-COUNTER - 1) * 2 + 1
+<br>            DISPLAY '*'
+<br>        END-PERFORM
+<br>        DISPLAY SPACE(J-COUNTER)  /* 左側のスペースを表示 */
+<br>    END-PERFORM.
+<br>
+<br>    STOP RUN.
+<br></div>
+<br>師匠も驚く時代になっている。今の大学生なら、普通にＡＩを利用しているの
+<br>だろうが、頭を悩まさなくても・・・。最後に、昨日開花宣言した桜の花をば。
+<br>
+<a href="./link/20240121_2Sakura.html"  target="_blank">  
+<img src="./Reimage/20240121_2Sakura.JPG" alt="桜" width="550" height=auto border="0" />
+</a>
+<br>１４時５４分　ビットコインの総資産　￥１７、８７１（↓５）
 <br>
 </div><!-- /#wrap -->
 </body>
